@@ -1,0 +1,125 @@
+:host {
+  --shape-corner: var(--mdui-shape-corner-full);
+
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-align: center;
+  border-radius: var(--shape-corner);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  .font-size(24);
+  .width(40);
+  .height(40);
+}
+
+:host([variant="standard"]) {
+  .color(on-surface-variant);
+  .state-layer-color(on-surface-variant);
+}
+
+:host([variant="filled"]) {
+  .color(primary);
+  .background-color(surface-container-highest);
+  .state-layer-color(primary);
+}
+
+:host([variant="tonal"]) {
+  .color(on-surface-variant);
+  .background-color(surface-container-highest);
+  .state-layer-color(on-surface-variant);
+}
+
+:host([variant="outlined"]) {
+  .border(1, solid, outline);
+  .color(on-surface-variant);
+  .state-layer-color(on-surface-variant);
+}
+
+:host([variant="outlined"][pressed]) {
+  .color(on-surface);
+  .state-layer-color(on-surface);
+}
+
+:host([variant="standard"][selected]:not([selected="false" i])) {
+  .color(primary);
+  .state-layer-color(primary);
+}
+
+:host([variant="filled"][selected]:not([selected="false" i])),
+:host([variant="filled"]:not([selectable])),
+:host([variant="filled"][selectable="false" i]) {
+  .color(on-primary);
+  .background-color(primary);
+  .state-layer-color(on-primary);
+}
+
+:host([variant="tonal"][selected]:not([selected="false" i])),
+:host([variant="tonal"]:not([selectable])),
+:host([variant="tonal"][selectable="false" i]) {
+  .color(on-secondary-container);
+  .background-color(secondary-container);
+  .state-layer-color(on-secondary-container);
+}
+
+:host([variant="outlined"][selected]:not([selected="false" i])) {
+  border: none;
+  .color(inverse-on-surface);
+  .background-color(inverse-surface);
+  .state-layer-color(inverse-on-surface);
+}
+
+:host([variant="filled"][disabled]:not([disabled="false" i])),
+:host([variant="tonal"][disabled]:not([disabled="false" i])),
+:host([variant="outlined"][disabled]:not([disabled="false" i])) {
+  .background-color(on-surface, 0.12);
+  .border-color(on-surface, 0.12);
+}
+
+:host([disabled]:not([disabled="false" i])),
+:host([loading]:not([loading="false" i])) {
+  cursor: default;
+  pointer-events: none;
+}
+
+:host([disabled]:not([disabled="false" i])) {
+  .color(on-surface, 0.38) !important;
+}
+
+.button {
+  float: left;
+  width: 100%;
+}
+
+:host([loading]:not([loading="false" i])) {
+  mdui-ripple,
+  .button {
+    opacity: 0;
+  }
+}
+
+.icon,
+.selected-icon mdui-icon,
+::slotted(*) {
+  font-size: inherit;
+}
+
+mdui-circular-progress {
+  display: flex;
+  position: absolute;
+  top: calc(50% - unit((24 / @mdui-root-font-size), rem) / 2);
+  left: calc(50% - unit((24 / @mdui-root-font-size), rem) / 2);
+  .width(24);
+  .height(24);
+
+  // filled 背景色和 loading 颜色冲突，需要特殊处理
+  :host([variant="filled"]:not([disabled])) &,
+  :host([variant="filled"][disabled="false" i]) & {
+    .stroke(on-primary);
+  }
+
+  :host([disabled]:not([disabled="false" i])) & {
+    .stroke(on-surface, 38%)
+  }
+}

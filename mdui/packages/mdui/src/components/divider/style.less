@@ -1,0 +1,19 @@
+:host {
+  display: block;
+  .height(1);
+  .background-color(surface-variant);
+}
+
+:host([inset]:not([inset="false" i])) {
+  .margin-left(16);
+}
+
+:host([middle]:not([middle="false" i])) {
+  .margin-left(16);
+  .margin-right(16);
+}
+
+:host([vertical]:not([vertical="false" i])) {
+  height: 100%;
+  .width(1);
+}

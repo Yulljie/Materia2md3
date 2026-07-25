@@ -1,0 +1,19 @@
+:host {
+  --shape-corner: var(--mdui-shape-corner-extra-small);
+
+  position: relative;
+  display: block;
+  border-radius: var(--shape-corner);
+  .background-color(surface-container);
+  .elevation(2);
+  .min-width(112);
+  .max-width(280);
+  .padding-top(8);
+  .padding-bottom(8);
+  .state-layer-color(on-surface);
+}
+
+::slotted(mdui-divider) {
+  .margin-top(8);
+  .margin-bottom(8);
+}

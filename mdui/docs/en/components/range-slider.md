@@ -1,0 +1,91 @@
+# Range Slider Component
+
+The Range Slider component allows users to select a range from a series of values.
+
+## Usage {#usage}
+
+Import the component:
+
+```js
+import 'mdui/components/range-slider.js';
+```
+
+Import the TypeScript type:
+
+```ts
+import type { RangeSlider } from 'mdui/components/range-slider.js';
+```
+
+Example:
+
+```html,example,playgroundId=336
+<mdui-range-slider></mdui-range-slider>
+```
+
+## Examples {#examples}
+
+### Default Value {#example-value}
+
+The `value` property represents the current value of the range slider. You can set the range slider's value by updating the `value` property. Note that the `value` property is an array and can only be accessed and updated in JavaScript.
+
+```html,example,expandable,playgroundId=337
+<mdui-range-slider class="example-value"></mdui-range-slider>
+
+<script>
+  const slider = document.querySelector(".example-value");
+  slider.value = [30, 70];
+</script>
+```
+
+### Disabled State {#example-disabled}
+
+The range slider can be disabled by adding the `disabled` attribute.
+
+```html,example,expandable,playgroundId=338
+<mdui-range-slider disabled></mdui-range-slider>
+```
+
+### Range {#example-min-max}
+
+The `min` and `max` attributes allow you to set the minimum and maximum values of the range slider.
+
+```html,example,expandable,playgroundId=339
+<mdui-range-slider min="10" max="20"></mdui-range-slider>
+```
+
+### Step Interval {#example-step}
+
+The `step` attribute defines the interval of the range slider.
+
+```html,example,expandable,playgroundId=340
+<mdui-range-slider step="10"></mdui-range-slider>
+```
+
+### Tickmarks {#example-tickmarks}
+
+Tickmarks can be displayed on the range slider by adding the `tickmarks` attribute.
+
+```html,example,expandable,playgroundId=341
+<mdui-range-slider tickmarks step="10"></mdui-range-slider>
+```
+
+### Hide Value Label {#example-nolabel}
+
+The value label on the range slider can be hidden by adding the `nolabel` attribute.
+
+```html,example,expandable,playgroundId=342
+<mdui-range-slider nolabel></mdui-range-slider>
+```
+
+### Customize Value Label {#example-labelFormatter}
+
+The `labelFormatter` property lets you customize how the value label is displayed. It receives the current range slider value and returns the text to display.
+
+```html,example,expandable,playgroundId=343
+<mdui-range-slider class="example-label-formatter"></mdui-range-slider>
+
+<script>
+  const slider = document.querySelector(".example-label-formatter");
+  slider.labelFormatter = (value) => `${value} hours`;
+</script>
+```

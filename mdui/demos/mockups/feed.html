@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+  <title>Feed</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: Roboto;
+      margin: 0;
+    }
+
+    .demo {
+      position: relative;
+      float: left;
+      width: 375px;
+      min-width: 375px;
+      height: 750px;
+      overflow: hidden;
+      border: 4px solid #000;
+      border-radius: 24px;
+    }
+
+    .settings {
+      padding-left: 32px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .settings-item {
+      margin-top: 16px;
+    }
+
+    .fab {
+      position: absolute;
+      right: 24px;
+      bottom: 104px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      padding-bottom: 12px;
+    }
+
+    .header .body {
+      flex: 1;
+      padding-left: 12px;
+      font-size: 12px;
+    }
+
+    .header .body .time {
+      padding-top: 4px;
+    }
+
+    .feed {
+      padding: 16px 16px 96px 16px;
+      box-sizing: border-box;
+      height: 100%;
+      overflow: auto;
+    }
+
+    .custom-color-cards {
+      display: flex;
+      justify-content: space-evenly;
+      margin-bottom: 16px;
+    }
+
+    .custom-color-cards mdui-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      flex: 1;
+      height: 100px;
+    }
+
+    .custom-color-cards mdui-card + mdui-card {
+      margin-left: 16px;
+    }
+
+    .custom-color-yellow {
+      background-color: rgb(var(--mdui-color-yellow-container));
+      color: rgb(var(--mdui-color-on-yellow-container));
+    }
+    .custom-color-yellow mdui-button {
+      background-color: rgb(var(--mdui-color-yellow));
+      color: rgb(var(--mdui-color-on-yellow));
+    }
+
+    .custom-color-orange {
+      background-color: rgb(var(--mdui-color-orange-container));
+      color: rgb(var(--mdui-color-on-orange-container));
+    }
+    .custom-color-orange mdui-button {
+      background-color: rgb(var(--mdui-color-orange));
+      color: rgb(var(--mdui-color-on-orange));
+    }
+
+    .custom-color-green {
+      background-color: rgb(var(--mdui-color-green-container));
+      color: rgb(var(--mdui-color-on-green-container));
+    }
+    .custom-color-green mdui-button {
+      background-color: rgb(var(--mdui-color-green));
+      color: rgb(var(--mdui-color-on-green));
+    }
+
+    .item {
+      padding: 16px;
+      width: 100%;
+    }
+
+    .item + .item,
+    .card-wrapper + .item,
+    .card-wrapper + .card-wrapper {
+      margin-top: 8px;
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 28px;
+    }
+
+    .summary {
+      font-size: 14px;
+      letter-spacing: 0.25px;
+      line-height: 20px;
+      padding-top: 4px;
+    }
+
+    .actions {
+      display: flex;
+      margin-top: 24px;
+    }
+
+    .actions mdui-button {
+      flex: 1;
+    }
+
+    .actions mdui-button + mdui-button {
+      margin-left: 16px;
+    }
+  </style>
+  <script type="module">
+    import '../../packages/mdui/mdui.css';
+    import '../../packages/mdui/components/card.js';
+    import '../../packages/mdui/components/button.js';
+    import '../../packages/mdui/components/button-icon.js';
+    import '../../packages/mdui/components/avatar.js';
+    import '../../packages/mdui/components/fab.js';
+    import '../../packages/mdui/components/navigation-bar.js';
+    import '../../packages/mdui/components/navigation-bar-item.js';
+    import '../../packages/mdui/components/switch.js';
+    import { $ } from '../../packages/jq/index.js';
+    import { setColorScheme } from '../../packages/mdui/functions/setColorScheme.js'
+    import { getColorFromImage } from '../../packages/mdui/functions/getColorFromImage.js';
+
+    $(() => {
+      const customColors = [
+        { name: 'yellow', value: '#ebc248' },
+        { name: 'orange', value: '#fd9b40' },
+        { name: 'green', value: '#6e970c' }
+      ];
+      $('#change-dark-mode').on('change', (e) => {
+        $('html')[e.target.checked ? 'addClass' : 'removeClass']('mdui-theme-dark');
+      });
+      $('#change-theme-global').on('input', (e) => {
+        setColorScheme(e.target.value, {
+          customColors,
+        });
+      });
+      $('#change-theme-demo').on('input', (e) => {
+        setColorScheme(e.target.value, {
+          target: document.querySelector('.demo')
+        });
+      });
+      $('#change-theme-card').on('input', (e) => {
+        setColorScheme(e.target.value, {
+          target: document.querySelector('.card1')
+        });
+      });
+      $('#change-theme-from-image').on('change', (e) => {
+        if (!e.target.files.length) {
+          return;
+        }
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = evt => {
+          $('body').css({
+            backgroundImage: `url(${evt.target.result})`
+          })
+          const image = new Image();
+          image.src = evt.target.result;
+          getColorFromImage(image).then(color => setColorScheme(color, { customColors }));
+        }
+        reader.readAsDataURL(file);
+      })
+    });
+  </script>
+</head>
+
+<body>
+
+  <div style="display: flex">
+    <div class="demo">
+      <div class="feed">
+        <div class="custom-color-cards">
+          <mdui-card class="custom-color-yellow">
+            Yellow
+            <mdui-button>Button</mdui-button>
+          </mdui-card>
+          <mdui-card class="custom-color-orange">
+            Orange
+            <mdui-button>Button</mdui-button>
+          </mdui-card>
+          <mdui-card class="custom-color-green">
+            Green
+            <mdui-button>Button</mdui-button>
+          </mdui-card>
+        </div>
+        <div class="card-wrapper card1">
+          <mdui-card clickable variant="filled" class="item">
+            <div class="header">
+              <mdui-avatar src="https://i.pravatar.cc/80?img=1"></mdui-avatar>
+              <div class="body">
+                <strong class="username">So Duri</strong>
+                <div class="time">20 min ago</div>
+              </div>
+              <mdui-button-icon icon="star_outline"></mdui-button-icon>
+            </div>
+            <div class="title">Dinner Club</div>
+            <div class="summary">I think it’s time for us to finally try that new noodle shop downtown that doesn’t use
+              menus. Anyone...</div>
+          </mdui-card>
+        </div>
+        <div class="card-wrapper card2">
+          <mdui-card clickable variant="filled" class="item card2">
+            <div class="header">
+              <mdui-avatar src="https://i.pravatar.cc/80?img=2"></mdui-avatar>
+              <div class="body">
+                <div class="username">Lily MacDonald</div>
+                <div class="time">2 hours ago</div>
+              </div>
+              <mdui-button-icon icon="star_outline"></mdui-button-icon>
+            </div>
+            <div class="title">This food show is made for you</div>
+            <div class="summary">Ping — you’d love this new food show I started watching. It’s produced by a Thai
+              drummer who started getting recognized for the amazing vegan...</div>
+            <div class="actions">
+              <mdui-button variant="elevated">Reply</mdui-button>
+              <mdui-button variant="elevated">Reply All</mdui-button>
+            </div>
+          </mdui-card>
+        </div>
+        <mdui-card clickable variant="filled" class="item">
+          <div class="header">
+            <mdui-avatar src="https://i.pravatar.cc/80?img=3"></mdui-avatar>
+            <div class="body">
+              <div class="username">Ziad Aouad</div>
+              <div class="time">6 hours ago</div>
+            </div>
+            <mdui-button-icon icon="star_outline"></mdui-button-icon>
+          </div>
+          <div class="title">Volunteer EMT with me?</div>
+          <div class="summary">What do you think about training to be a volunteer EMTs? We could do it together for
+            moral support. Think about it??</div>
+        </mdui-card>
+      </div>
+
+      <mdui-fab icon="edit--outlined" size="large" class="fab"></mdui-fab>
+
+      <mdui-navigation-bar style="position: absolute;">
+        <mdui-navigation-bar-item icon="inbox--outlined" activeicon="inbox--filled" badge="4">Inbox
+        </mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="subject--outlined" activeicon="subject--filled">Articles
+        </mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="chat_bubble_outline" activeicon="chat_bubble">Direct Message
+        </mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="videocam--outlined" activeicon="videocam--filled">Video Chat
+        </mdui-navigation-bar-item>
+      </mdui-navigation-bar>
+    </div>
+
+    <div class="settings">
+      <mdui-switch class="settings-item" id="change-dark-mode"></mdui-switch>
+      <label class="settings-item">全局主题：<input type="color" id="change-theme-global" /></label>
+      <label class="settings-item">demo主题：<input type="color" id="change-theme-demo" /></label>
+      <label class="settings-item">第一张卡片主题：<input type="color" id="change-theme-card" /></label>
+      <input class="settings-item" type="file" accept="image/png, image/jpeg" id="change-theme-from-image" />
+    </div>
+  </div>
+
+</body>
+
+</html>

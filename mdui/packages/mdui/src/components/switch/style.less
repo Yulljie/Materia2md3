@@ -1,0 +1,233 @@
+:host {
+  --shape-corner: var(--mdui-shape-corner-full);
+  --shape-corner-thumb: var(--mdui-shape-corner-full);
+
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  .height(40);
+}
+
+:host([disabled]:not([disabled="false" i])) {
+  cursor: default;
+  pointer-events: none;
+}
+
+label {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  white-space: nowrap;
+  cursor: inherit;
+  user-select: none;
+  touch-action: manipulation;
+  zoom: 1;
+  -webkit-user-drag: none;
+}
+
+/* 轨道 */
+.track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: var(--shape-corner);
+  transition-property: background-color, border-width;
+  .transition-duration(short4);
+  .transition-timing-function(standard);
+  .height(32);
+  .width(52);
+  .border(2, solid, outline);
+  .background-color(surface-container-highest);
+
+  :host([checked]:not([checked="false" i])) & {
+    .background-color(primary);
+    .border-width(0);
+  }
+
+  .invalid & {
+    .background-color(error-container);
+    .border-color(error);
+  }
+
+  :host([disabled]:not([disabled="false" i])) & {
+    .background-color(surface-container-highest, 0.12);
+    .border-color(on-surface, 0.12);
+  }
+
+  :host([disabled][checked]:not([disabled="false" i], [checked="false" i])) & {
+    .background-color(on-surface, 0.12);
+  }
+}
+
+/* 隐藏系统 input 标签，用自定义的图标代替 */
+input {
+  position: absolute;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  .width(20);
+  .height(20);
+  .margin(0, 0, 0, 10);
+}
+
+mdui-ripple {
+  border-radius: 50%;
+  transition-property: left, top;
+  .transition-duration(short4);
+  .transition-timing-function(standard);
+  .width(40);
+  .height(40);
+}
+
+.thumb {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--shape-corner-thumb);
+  transition-property: width, height, left, background-color;
+  .transition-duration(short4);
+  .transition-timing-function(standard);
+  .height(16);
+  .width(16);
+  .left(6);
+  .background-color(outline);
+  .state-layer-color(on-surface);
+
+  mdui-ripple {
+    .left(-12);
+    .top(-12);
+  }
+
+  .has-unchecked-icon & {
+    .height(24);
+    .width(24);
+    .left(2);
+
+    mdui-ripple {
+      .left(-8);
+      .top(-8);
+    }
+  }
+
+  :host([hover]) &,
+  :host([focus-visible]) &,
+  :host([pressed]) & {
+    .background-color(on-surface-variant);
+  }
+
+  :host([checked]:not([checked="false" i])) & {
+    .height(24);
+    .width(24);
+    .left(24);
+    .background-color(on-primary);
+    .state-layer-color(primary);
+
+    mdui-ripple {
+      .left(-8);
+      .top(-8);
+    }
+  }
+
+  :host([pressed]) & {
+    .height(28);
+    .width(28);
+    .left(0);
+
+    mdui-ripple {
+      .left(-6);
+      .top(-6);
+    }
+  }
+
+  :host([pressed][checked]:not([checked="false" i])) & {
+    .left(22);
+  }
+
+  :host([hover][checked]:not([checked="false" i])) &,
+  :host([focus-visible][checked]:not([checked="false" i])) &,
+  :host([pressed][checked]:not([checked="false" i])) & {
+    .background-color(primary-container);
+  }
+
+  .invalid & {
+    .background-color(error);
+    .state-layer-color(error);
+  }
+
+  :host([hover]) .invalid &,
+  :host([focus-visible]) .invalid &,
+  :host([pressed]) .invalid & {
+    .background-color(error);
+  }
+
+  :host([disabled]:not([disabled="false" i])) & {
+    .background-color(on-surface, 0.38);
+  }
+
+  :host([disabled][checked]:not([disabled="false" i], [checked="false" i])) & {
+    .background-color(surface);
+  }
+}
+
+.unchecked-icon,
+.checked-icon {
+  display: flex;
+  position: absolute;
+  transition-property: opacity, transform;
+  .font-size(16);
+}
+
+.unchecked-icon {
+  opacity: 1;
+  transform: scale(1);
+  .transition-delay(short1);
+  .transition-duration(short3);
+  .transition-timing-function(linear);
+  .color(surface-container-highest);
+
+  :host([checked]:not([checked="false" i])) & {
+    opacity: 0;
+    transform: scale(0.92);
+    transition-delay: 0ms;
+    .transition-duration(short1);
+  }
+
+  :host([disabled]:not([disabled="false" i])) & {
+    .color(surface-container-highest, 0.38);
+  }
+}
+
+.checked-icon {
+  opacity: 0;
+  transform: scale(0.92);
+  transition-delay: 0ms;
+  .transition-duration(short1);
+  .transition-timing-function(linear);
+  .color(on-primary-container);
+
+  :host([checked]:not([checked="false" i])) & {
+    opacity: 1;
+    transform: scale(1);
+    .transition-delay(short1);
+    .transition-duration(short3);
+  }
+
+  .invalid & {
+    .color(error-container);
+  }
+
+  :host([disabled]:not([disabled="false" i])) & {
+    .color(on-surface, 0.38);
+  }
+}
+
+.unchecked-icon .i,
+.checked-icon .i,
+::slotted([slot="unchecked-icon"]),
+::slotted([slot="checked-icon"]) {
+  font-size: inherit;
+  color: inherit;
+}

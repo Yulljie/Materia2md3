@@ -1,0 +1,18 @@
+{
+  "html.customData": ["./packages/mdui/html-data.zh-cn.json"],
+  "css.customData": ["./packages/mdui/css-data.zh-cn.json"],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "eslint.format.enable": true,
+  "editor.formatOnSave": true,
+  "files.exclude": {
+    "packages/**/*.d.ts": true,
+    "packages/**/*.js": true,
+    "packages/**/*style.ts": true,
+    "packages/shared/{base,controllers,decorators,helpers,lit-styles,mixins}": true,
+    "packages/jq/{functions,methods,shared,static}": true,
+    "packages/mdui/{components,functions}": true,
+    "packages/icons-shared/shared": true,
+    "packages/icons/src/*.ts": true
+  }
+}

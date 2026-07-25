@@ -1,0 +1,137 @@
+:host {
+  position: relative;
+  display: block;
+}
+
+:host([selected]) {
+  .background-color(primary, 12%);
+}
+
+:host([disabled]:not([disabled="false" i])) {
+  pointer-events: none;
+}
+
+.container {
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  :host([disabled]:not([disabled="false" i])) & {
+    cursor: default;
+    opacity: 0.38;
+  }
+}
+
+.preset {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  .height(48);
+  .padding(0, 12);
+
+  &.dense {
+    .height(32);
+  }
+}
+
+.label-container {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+.label {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  .color(on-surface);
+  .font-size(label-large);
+  .font-weight(label-large);
+  .letter-spacing(label-large);
+}
+
+.icon,
+.selected-icon,
+.end-icon,
+.end-text {
+  display: none;
+  flex: 0 0 auto;
+  .color(on-surface-variant);
+}
+
+.has-icon .icon,
+.has-icon .selected-icon,
+.has-end-icon .end-icon,
+.has-end-text .end-text {
+  display: flex;
+}
+
+.icon,
+.selected-icon,
+.end-icon {
+  .font-size(24);
+
+  &::slotted(mdui-avatar) {
+    .width(24);
+    .height(24);
+  }
+}
+
+.dense .icon,
+.dense .selected-icon,
+.dense .end-icon {
+  .font-size(18);
+
+  &::slotted(mdui-avatar) {
+    .width(18);
+    .height(18);
+  }
+}
+
+.icon .i,
+.selected-icon .i,
+.end-icon .i,
+::slotted([slot="icon"]),
+::slotted([slot="selected-icon"]),
+::slotted([slot="end-icon"]) {
+  font-size: inherit;
+}
+
+.end-text {
+  .typescale(label-large);
+}
+
+.icon,
+.selected-icon {
+  .margin-right(12);
+}
+
+.end-icon,
+.end-text {
+  .margin-left(12);
+}
+
+.arrow-right {
+  .color(on-surface);
+}
+
+.submenu {
+  --shape-corner: var(--mdui-shape-corner-extra-small);
+
+  display: block;
+  position: absolute;
+  z-index: 1;
+  border-radius: var(--shape-corner);
+  .background-color(surface-container);
+  .elevation(2);
+  .min-width(112);
+  .max-width(280);
+  .padding-top(8);
+  .padding-bottom(8);
+  .state-layer-color(on-surface);
+
+  &::slotted(mdui-divider) {
+    .margin-top(8);
+    .margin-bottom(8);
+  }
+}

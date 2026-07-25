@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+  <title>Navigation rail</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: Roboto;
+    }
+    .container {
+      position: relative;
+      width: 800px;
+      height: 675px;
+      box-sizing: border-box;
+      overflow: auto;
+      box-shadow: 0 0.85px 3px 0 rgba(0, 0, 0, 19%), 0 0.25px 1px 0 rgba(0, 0, 0, 3.9%);
+    }
+  </style>
+  <script type="module">
+    import '../../packages/mdui/mdui.css';
+    import '../../packages/mdui/components/button-icon.js';
+    import '../../packages/mdui/components/fab.js';
+    import '../../packages/mdui/components/navigation-rail.js';
+    import '../../packages/mdui/components/navigation-rail-item.js';
+    import '../../packages/mdui/components/segmented-button-group.js';
+    import '../../packages/mdui/components/segmented-button.js';
+    import '../../packages/mdui/components/badge.js';
+    import '../../packages/icons/folder-open--outlined.js';
+    import '../../packages/icons/library-music--outlined.js';
+    import '../../packages/icons/library-music.js';
+    import '../../packages/icons/watch-later.js';
+    import '../../packages/icons/image--outlined.js';
+    import { $ } from '../../packages/jq/index.js';
+
+    $(() => {
+      $('.fill-placeholder').append(...Array.from({length: 100}, (_, index) => index + 1).map(item => `<p>${item}</p>`));
+
+      $('.change-placement').on('change', function () {
+        $(this).next().find('mdui-navigation-rail')[0].placement = this.value;
+      });
+
+      $('.change-alignment').on('change', function () {
+        $(this).next().find('mdui-navigation-rail')[0].alignment = this.value;
+      });
+
+      $('#default-value').on('change', e => {
+        console.log('change event: ', e.target);
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h2>normal</h2>
+      <mdui-navigation-rail>
+        <mdui-button-icon icon="menu" slot="top"></mdui-button-icon>
+        <mdui-fab lowered icon="edit--outlined" slot="top"></mdui-fab>
+        <mdui-navigation-rail-item icon="folder_open--outlined">All Files</mdui-navigation-rail-item>
+        <mdui-navigation-rail-item icon="watch_later--outlined">Recent</mdui-navigation-rail-item>
+        <mdui-navigation-rail-item icon="image--outlined">Images</mdui-navigation-rail-item>
+        <mdui-navigation-rail-item icon="library_music--outlined" no-ripple>no-ripple</mdui-navigation-rail-item>
+      </mdui-navigation-rail>
+    </section>
+
+    <section>
+      <h2>contained</h2>
+      <div class="container" style="position: relative; overflow: hidden;">
+        <mdui-navigation-rail contained>
+          <mdui-button-icon icon="menu" slot="top"></mdui-button-icon>
+          <mdui-fab lowered icon="edit--outlined" slot="top"></mdui-fab>
+          <mdui-navigation-rail-item icon="folder_open--outlined">All Files</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="watch_later--outlined">Recent</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="image--outlined">Images</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="library_music--outlined">Library</mdui-navigation-rail-item>
+        </mdui-navigation-rail>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>no label</h2>
+      <div class="container" style="position: relative; overflow: hidden;">
+        <mdui-navigation-rail contained>
+          <mdui-button-icon icon="menu" slot="top"></mdui-button-icon>
+          <mdui-fab lowered icon="edit--outlined" slot="top"></mdui-fab>
+          <mdui-navigation-rail-item icon="folder_open--outlined"></mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="watch_later--outlined"></mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="image--outlined"></mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="library_music--outlined"></mdui-navigation-rail-item>
+        </mdui-navigation-rail>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>value</h2>
+      <div class="container" style="position: relative; overflow: hidden;">
+        <mdui-navigation-rail contained value="recent" id="default-value">
+          <mdui-button-icon icon="menu" slot="top"></mdui-button-icon>
+          <mdui-fab lowered icon="edit--outlined" slot="top"></mdui-fab>
+          <mdui-navigation-rail-item icon="folder_open--outlined" value="files">All Files</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="watch_later--outlined" value="recent">Recent</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="image--outlined" value="images">Images</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="library_music--outlined" value="library">Library</mdui-navigation-rail-item>
+        </mdui-navigation-rail>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>placement</h2>
+      <mdui-segmented-button-group selects="single" value="right" class="change-placement">
+        <mdui-segmented-button value="left">left</mdui-segmented-button>
+        <mdui-segmented-button value="right">right</mdui-segmented-button>
+      </mdui-segmented-button-group>
+      <div class="container" style="position: relative; overflow: hidden;">
+        <mdui-navigation-rail contained value="recent" placement="right">
+          <mdui-button-icon icon="menu" slot="top"></mdui-button-icon>
+          <mdui-fab lowered icon="edit--outlined" slot="top"></mdui-fab>
+          <mdui-navigation-rail-item icon="folder_open--outlined" value="files">All Files</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="watch_later--outlined" value="recent">Recent</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="image--outlined" value="images">Images</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="library_music--outlined" value="library">Library</mdui-navigation-rail-item>
+        </mdui-navigation-rail>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>alignment & top slot</h2>
+      <mdui-segmented-button-group selects="single" value="center" class="change-alignment">
+        <mdui-segmented-button value="start">start</mdui-segmented-button>
+        <mdui-segmented-button value="center">center</mdui-segmented-button>
+        <mdui-segmented-button value="end">end</mdui-segmented-button>
+      </mdui-segmented-button-group>
+      <div class="container" style="position: relative; overflow: hidden;">
+        <mdui-navigation-rail contained value="recent" alignment="center">
+          <mdui-button-icon icon="menu" slot="top"></mdui-button-icon>
+          <mdui-fab lowered icon="edit--outlined" slot="top"></mdui-fab>
+          <mdui-navigation-rail-item icon="folder_open--outlined" value="files">All Files</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="watch_later--outlined" value="recent">Recent</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="image--outlined" value="images">Images</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="library_music--outlined" value="library">Library</mdui-navigation-rail-item>
+        </mdui-navigation-rail>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>alignment & bottom slot</h2>
+      <mdui-segmented-button-group selects="single" value="center" class="change-alignment">
+        <mdui-segmented-button value="start">start</mdui-segmented-button>
+        <mdui-segmented-button value="center">center</mdui-segmented-button>
+        <mdui-segmented-button value="end">end</mdui-segmented-button>
+      </mdui-segmented-button-group>
+      <div class="container" style="position: relative; overflow: hidden;">
+        <mdui-navigation-rail contained value="recent" alignment="center">
+          <mdui-navigation-rail-item icon="folder_open--outlined" value="files">All Files</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="watch_later--outlined" value="recent">Recent</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="image--outlined" value="images">Images</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="library_music--outlined" value="library">Library</mdui-navigation-rail-item>
+          <mdui-fab lowered icon="edit--outlined" slot="bottom"></mdui-fab>
+          <mdui-button-icon icon="menu" slot="bottom"></mdui-button-icon>
+        </mdui-navigation-rail>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>alignment & top and bottom slot</h2>
+      <mdui-segmented-button-group selects="single" value="center" class="change-alignment">
+        <mdui-segmented-button value="start">start</mdui-segmented-button>
+        <mdui-segmented-button value="center">center</mdui-segmented-button>
+        <mdui-segmented-button value="end">end</mdui-segmented-button>
+      </mdui-segmented-button-group>
+      <div class="container" style="position: relative; overflow: hidden;">
+        <mdui-navigation-rail contained value="recent" alignment="center">
+          <mdui-button-icon icon="menu" slot="top"></mdui-button-icon>
+          <mdui-fab lowered icon="edit--outlined" slot="top"></mdui-fab>
+          <mdui-navigation-rail-item icon="folder_open--outlined" value="files">All Files</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="watch_later--outlined" value="recent">Recent</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="image--outlined" value="images">Images</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="library_music--outlined" value="library">Library</mdui-navigation-rail-item>
+          <mdui-fab lowered icon="edit--outlined" slot="bottom"></mdui-fab>
+          <mdui-button-icon icon="menu" slot="bottom"></mdui-button-icon>
+        </mdui-navigation-rail>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>alignment & no top and bottom slot</h2>
+      <mdui-segmented-button-group selects="single" value="center" class="change-alignment">
+        <mdui-segmented-button value="start">start</mdui-segmented-button>
+        <mdui-segmented-button value="center">center</mdui-segmented-button>
+        <mdui-segmented-button value="end">end</mdui-segmented-button>
+      </mdui-segmented-button-group>
+      <div class="container" style="position: relative; overflow: hidden;">
+        <mdui-navigation-rail contained value="recent" alignment="center">
+          <mdui-navigation-rail-item icon="folder_open--outlined" value="files">All Files</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="watch_later--outlined" value="recent">Recent</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="image--outlined" value="images">Images</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="library_music--outlined" value="library">Library</mdui-navigation-rail-item>
+        </mdui-navigation-rail>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>divider</h2>
+      <div class="container" style="position: relative; overflow: hidden;">
+        <mdui-navigation-rail contained divider value="recent">
+          <mdui-button-icon icon="menu" slot="top"></mdui-button-icon>
+          <mdui-fab lowered icon="edit--outlined" slot="top"></mdui-fab>
+          <mdui-navigation-rail-item icon="folder_open--outlined" value="files">All Files</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="watch_later--outlined" value="recent">Recent</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="image--outlined" value="images">Images</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="library_music--outlined" value="library">Library</mdui-navigation-rail-item>
+        </mdui-navigation-rail>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>badge</h2>
+      <div class="container" style="position: relative; overflow: hidden;">
+        <mdui-navigation-rail contained value="recent">
+          <mdui-button-icon icon="menu" slot="top"></mdui-button-icon>
+          <mdui-fab lowered icon="edit--outlined" slot="top"></mdui-fab>
+          <mdui-navigation-rail-item icon="folder_open--outlined" value="files">All Files
+            <mdui-badge variant="small" slot="badge"></mdui-badge>
+          </mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="watch_later--outlined" value="recent">Recent
+            <mdui-badge slot="badge">1</mdui-badge>
+          </mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="image--outlined" value="images">Images
+            <mdui-badge slot="badge">99+</mdui-badge>
+          </mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="library_music--outlined" value="library">Library</mdui-navigation-rail-item>
+        </mdui-navigation-rail>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Active Icon</h2>
+      <div class="container" style="position: relative; overflow: hidden;">
+        <mdui-navigation-rail contained value="recent">
+          <mdui-button-icon icon="menu" slot="top"></mdui-button-icon>
+          <mdui-fab lowered icon="edit--outlined" slot="top"></mdui-fab>
+          <mdui-navigation-rail-item icon="folder_open--outlined" active-icon="folder_open--filled" value="files">All Files</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="watch_later--outlined" active-icon="watch_later--filled" value="recent">Recent</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="image--outlined" active-icon="image--filled" value="images">Images</mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="library_music--outlined" active-icon="library_music--filled" value="library">Library</mdui-navigation-rail-item>
+        </mdui-navigation-rail>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Active Icon slot</h2>
+      <div class="container" style="position: relative; overflow: hidden;">
+        <mdui-navigation-rail contained value="recent">
+          <mdui-button-icon icon="menu" slot="top"></mdui-button-icon>
+          <mdui-fab lowered icon="edit--outlined" slot="top"></mdui-fab>
+          <mdui-navigation-rail-item active-icon="folder--filled" value="files">All Files
+            <mdui-icon-folder-open--outlined slot="icon"></mdui-icon-folder-open--outlined>
+          </mdui-navigation-rail-item>
+          <mdui-navigation-rail-item icon="watch_later--outlined" value="recent">Recent
+            <mdui-icon-watch-later slot="active-icon"></mdui-icon-watch-later>
+          </mdui-navigation-rail-item>
+          <mdui-navigation-rail-item value="images">Images
+            <mdui-icon-image--outlined slot="icon"></mdui-icon-image--outlined>
+          </mdui-navigation-rail-item>
+          <mdui-navigation-rail-item value="library">Library
+            <mdui-icon-library-music--outlined slot="icon"></mdui-icon-library-music--outlined>
+            <mdui-icon-library-music slot="active-icon"></mdui-icon-library-music>
+          </mdui-navigation-rail-item>
+        </mdui-navigation-rail>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

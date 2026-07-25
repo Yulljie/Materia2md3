@@ -1,0 +1,135 @@
+:host {
+  --shape-corner: var(--mdui-shape-corner-extra-small);
+  --z-index: 2400;
+
+  position: fixed;
+  z-index: var(--z-index);
+  display: none;
+  align-items: center;
+  flex-wrap: wrap;
+  border-radius: var(--shape-corner);
+  transform: scaleY(0);
+  transition: transform 0ms var(--mdui-motion-easing-linear) var(--mdui-motion-duration-short4);
+  .min-width(320);
+  .max-width(576);
+  .padding(4, 0);
+  .elevation(3);
+  .background-color(inverse-surface);
+  .color(inverse-on-surface);
+  .typescale(body-medium);
+}
+
+:host([placement^="top"]) {
+  transform-origin: top;
+}
+
+:host([placement^="bottom"]) {
+  transform-origin: bottom;
+}
+
+:host([placement="top-start"]:not([mobile])),
+:host([placement="bottom-start"]:not([mobile])) {
+  .left(16);
+}
+
+:host([placement="top-end"]:not([mobile])),
+:host([placement="bottom-end"]:not([mobile])) {
+  .right(16);
+}
+
+:host([placement="top"]:not([mobile])),
+:host([placement="bottom"]:not([mobile])) {
+  left: 50%;
+  transform: scaleY(0) translateX(-50%);
+}
+
+:host([mobile]) {
+  min-width: 0;
+  .left(16);
+  .right(16);
+}
+
+:host([open]) {
+  transform: scaleY(1);
+  transition: top var(--mdui-motion-duration-short4) var(--mdui-motion-easing-standard),
+              bottom var(--mdui-motion-duration-short4) var(--mdui-motion-easing-standard),
+              transform var(--mdui-motion-duration-medium4) var(--mdui-motion-easing-emphasized-decelerate);
+}
+
+:host([placement="top"][open]:not([mobile])),
+:host([placement="bottom"][open]:not([mobile])) {
+  transform: scaleY(1) translateX(-50%);
+}
+
+.message {
+  display: block;
+  .margin(10, 16);
+
+  :host([message-line="1"]) & {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  :host([message-line="2"]) & {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
+
+.action-group {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  .padding-right(8);
+}
+
+.action,
+.close-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action {
+  .color(inverse-primary);
+  .font-size(label-large);
+  .font-weight(label-large);
+  .letter-spacing(label-large);
+}
+
+.action mdui-button,
+::slotted(mdui-button[slot="action"][variant="text"]),
+::slotted(mdui-button[slot="action"][variant="outlined"]) {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  .state-layer-color(inverse-primary);
+}
+
+.action mdui-button::part(button) {
+  .padding(0, 8);
+}
+
+.close-button {
+  .margin(0, -4, 0, 4);
+  .font-size(24);
+  .color(inverse-on-surface);
+}
+
+.close-button mdui-button-icon,
+::slotted(mdui-button-icon[slot="close-button"][variant="standard"]),
+::slotted(mdui-button-icon[slot="close-button"][variant="outlined"]) {
+  font-size: inherit;
+  color: inherit;
+  .state-layer-color(inverse-on-surface);
+}
+
+.close-button .i,
+::slotted([slot="close-icon"]) {
+  font-size: inherit;
+}

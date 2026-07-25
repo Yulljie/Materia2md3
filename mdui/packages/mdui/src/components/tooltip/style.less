@@ -1,0 +1,54 @@
+:host {
+  --shape-corner-plain: var(--mdui-shape-corner-extra-small);
+  --shape-corner-rich: var(--mdui-shape-corner-medium);
+  --z-index: 2500;
+
+  display: contents;
+}
+
+.popup {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  z-index: var(--z-index);
+  border-radius: var(--shape-corner-plain);
+  .background-color(inverse-surface);
+  .padding(0, 8);
+  .min-width(28);
+  .max-width(320);
+
+  :host([variant="rich"]) & {
+    border-radius: var(--shape-corner-rich);
+    .background-color(surface-container);
+    .elevation(2);
+    .padding(12, 16, 8, 16);
+  }
+}
+
+.headline {
+  display: flex;
+  .color(on-surface-variant);
+  .typescale(title-small);
+}
+
+.content {
+  display: flex;
+  .padding(4, 0);
+  .color(inverse-on-surface);
+  .typescale(body-small);
+
+  :host([variant="rich"]) & {
+    .color(on-surface-variant);
+    .typescale(body-medium);
+  }
+}
+
+.action {
+  display: flex;
+  justify-content: flex-start;
+  .padding-top(8);
+
+  ::slotted(:not(:last-child)) {
+    .margin-right(8);
+  }
+}

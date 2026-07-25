@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+  <title>Navigation bar</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: Roboto;
+    }
+    .container {
+      position: relative;
+      width: 500px;
+      height: 375px;
+      overflow: hidden;
+      box-shadow: 0 0.85px 3px 0 rgba(0, 0, 0, 19%), 0 0.25px 1px 0 rgba(0, 0, 0, 3.9%);
+    }
+    @media (min-width: 500px) {
+      mdui-navigation-bar {
+        width: 500px;
+      }
+    }
+    @media (max-width: 499px) {
+      .container {
+        width: 100%;
+      }
+    }
+  </style>
+  <script type="module">
+    import '../../packages/mdui/mdui.css';
+    import '../../packages/mdui/components/navigation-bar.js';
+    import '../../packages/mdui/components/navigation-bar-item.js';
+    import '../../packages/mdui/components/badge.js';
+    import '../../packages/icons/place.js';
+    import '../../packages/icons/place--outlined.js';
+    import { $ } from '../../packages/jq/index.js';
+
+    $(() => {
+      $('.fill-placeholder').append(...Array.from({length: 100}, (_, index) => index + 1).map(item => `<p>${item}</p>`));
+
+      $('#default-value').on({
+        change: (e) => { console.log('change event: ', e.target); },
+        show: (e) => { console.log('show event: ', e.target); },
+        shown: (e) => { console.log('shown event: ', e.target); },
+        hide: (e) => { console.log('hide event: ', e.target); },
+        hidden: (e) => { console.log('hidden event: ', e.target); },
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h2>label-visibility Auto</h2>
+      <mdui-navigation-bar style="margin: 16px 0; position: relative">
+        <mdui-navigation-bar-item icon="place" value="place">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="commute" value="commute">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="bookmark_border" value="bookmark" no-ripple>no-ripple</mdui-navigation-bar-item>
+      </mdui-navigation-bar>
+      <mdui-navigation-bar style="margin: 16px 0; position: relative">
+        <mdui-navigation-bar-item icon="place" value="place">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="commute" value="commute">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="bookmark_border" value="bookmark">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="add_circle_outline" value="add">Label</mdui-navigation-bar-item>
+      </mdui-navigation-bar>
+      <mdui-navigation-bar value="commute" style="margin: 16px 0; position: relative">
+        <mdui-navigation-bar-item icon="place" value="place">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="commute" value="commute">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="bookmark_border" value="bookmark">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="add_circle_outline" value="add">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="notifications_none" value="notifications">Label</mdui-navigation-bar-item>
+      </mdui-navigation-bar>
+    </section>
+
+    <section>
+      <h2>label-visibility unlabeled</h2>
+      <mdui-navigation-bar value="commute" label-visibility="unlabeled" style="position: relative">
+        <mdui-navigation-bar-item icon="place" value="place">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="commute" value="commute">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="bookmark_border" value="bookmark">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="add_circle_outline" value="add">Label</mdui-navigation-bar-item>
+      </mdui-navigation-bar>
+    </section>
+
+    <section>
+      <h2>Badge</h2>
+      <mdui-navigation-bar style="position: relative">
+        <mdui-navigation-bar-item icon="place">Label
+          <mdui-badge variant="small" slot="badge"></mdui-badge>
+        </mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="commute">Label
+          <mdui-badge slot="badge">1</mdui-badge>
+        </mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="bookmark_border" badge="99+">Label
+          <mdui-badge slot="badge">99+</mdui-badge>
+        </mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="add_circle_outline">Label</mdui-navigation-bar-item>
+      </mdui-navigation-bar>
+    </section>
+
+    <section>
+      <h2>Active Icon</h2>
+      <mdui-navigation-bar style="position: relative">
+        <mdui-navigation-bar-item icon="place--outlined" active-icon="place--filled">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="commute--outlined" active-icon="commute--filled">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="bookmark_border--outlined" active-icon="bookmark_border--filled">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="add_circle_outline--outlined" active-icon="add_circle_outline--filled">Label</mdui-navigation-bar-item>
+      </mdui-navigation-bar>
+    </section>
+
+    <section>
+      <h2>Active Icon slot</h2>
+      <mdui-navigation-bar style="position: relative;">
+        <mdui-navigation-bar-item active-icon="place--filled">
+          <mdui-icon-place--outlined slot="icon"></mdui-icon-place--outlined>
+          Label
+        </mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="place--outlined">
+          <mdui-icon-place slot="active-icon"></mdui-icon-place>
+          Label
+        </mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="place--outlined" active-icon="place--filled">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item>
+          <mdui-icon-place--outlined slot="icon"></mdui-icon-place--outlined>
+          <mdui-icon-place slot="active-icon"></mdui-icon-place>
+          Label
+        </mdui-navigation-bar-item>
+        <mdui-navigation-bar-item>
+          <mdui-icon-place--outlined slot="icon"></mdui-icon-place--outlined>
+          Label
+        </mdui-navigation-bar-item>
+      </mdui-navigation-bar>
+    </section>
+
+    <section>
+      <h2>scroll-behavior="hide" & default position:fixed</h2>
+      <mdui-navigation-bar scroll-behavior="hide" value="commute" id="default-value">
+        <mdui-navigation-bar-item icon="place" value="place">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="commute" value="commute">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="bookmark_border" value="bookmark">Label</mdui-navigation-bar-item>
+        <mdui-navigation-bar-item icon="add_circle_outline" value="add">Label</mdui-navigation-bar-item>
+      </mdui-navigation-bar>
+    </section>
+
+    <section>
+      <h2>scroll-target="#in-container" scroll-behavior="hide"</h2>
+      <div class="container">
+        <mdui-navigation-bar scroll-target="#in-container" scroll-behavior="hide">
+          <mdui-navigation-bar-item icon="place" value="place">Label</mdui-navigation-bar-item>
+          <mdui-navigation-bar-item icon="commute" value="commute">Label</mdui-navigation-bar-item>
+          <mdui-navigation-bar-item icon="bookmark_border" value="bookmark">Label</mdui-navigation-bar-item>
+          <mdui-navigation-bar-item icon="add_circle_outline" value="add">Label</mdui-navigation-bar-item>
+        </mdui-navigation-bar>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box" id="in-container">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>scroll-threshold</h2>
+      <div class="container">
+        <mdui-navigation-bar scroll-target="#scroll-threshold" scroll-behavior="hide" scroll-threshold="80">
+          <mdui-navigation-bar-item icon="place" value="place">Label</mdui-navigation-bar-item>
+          <mdui-navigation-bar-item icon="commute" value="commute">Label</mdui-navigation-bar-item>
+          <mdui-navigation-bar-item icon="bookmark_border" value="bookmark">Label</mdui-navigation-bar-item>
+          <mdui-navigation-bar-item icon="add_circle_outline" value="add">Label</mdui-navigation-bar-item>
+        </mdui-navigation-bar>
+        <div style="max-height: 100%; overflow: auto; box-sizing: border-box" id="scroll-threshold">
+          <div class="fill-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="fill-placeholder"></div>
+
+  </main>
+</body>
+
+</html>

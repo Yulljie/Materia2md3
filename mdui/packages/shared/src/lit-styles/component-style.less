@@ -1,0 +1,22 @@
+:host {
+  box-sizing: border-box;
+}
+
+:host {
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+}
+
+:host(:focus),
+:host(:focus-visible),
+:host *:focus,
+:host *:focus-visible {
+  outline: none;
+}
+
+[hidden] {
+  display: none !important;
+}

@@ -1,0 +1,94 @@
+:host {
+  position: relative;
+  .state-layer-color(on-surface);
+}
+
+:host([active]) {
+  .state-layer-color(primary);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  height: 100%;
+}
+
+.preset {
+  flex-direction: column;
+  .min-height(48);
+  .padding(10, 16);
+
+  :host([inline]:not([inline="false" i])) & {
+    flex-direction: row;
+  }
+}
+
+.icon-container,
+.label-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-container {
+  ::slotted([slot="badge"]) {
+    position: absolute;
+    transform: translate(50%, -50%); // 距离图标左侧和底部 12dp
+  }
+
+  ::slotted([slot="badge"][variant="small"]) {
+    .translate(9, -9); // 位于图标右上角
+  }
+}
+
+.label-container {
+  ::slotted([slot="badge"]) {
+    position: absolute;
+    left: 100%;
+    bottom: 100%;
+    .translate(-12, 10); // 位于文本右上角，向左下方移动 12dp, 10dp
+  }
+
+  ::slotted([slot="badge"][variant="small"]) {
+    .translate(-6, 6); // 位于文本右上角
+  }
+}
+
+.icon,
+.label {
+  display: flex;
+  .color(on-surface-variant);
+
+  :host([hover]) &,
+  :host([focused]) &,
+  :host([pressed]) & {
+    .color(on-surface);
+  }
+
+  :host([active]) & {
+    .color(primary);
+  }
+
+  :host([active]) .variant-secondary & {
+    .color(on-surface);
+  }
+}
+
+.icon {
+  .font-size(24);
+}
+
+.label {
+  .typescale(title-small);
+}
+
+.icon mdui-icon,
+::slotted([slot="icon"]) {
+  font-size: inherit;
+  color: inherit;
+}

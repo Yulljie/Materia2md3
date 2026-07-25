@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <title>Dropdown</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: Roboto;
+      }
+
+      mdui-button {
+        display: inline-block;
+      }
+    </style>
+    <script type="module">
+      import '../../packages/mdui/mdui.css';
+      import '../../packages/mdui/components/dropdown.js';
+      import '../../packages/mdui/components/button.js';
+      import '../../packages/mdui/components/menu.js';
+      import '../../packages/mdui/components/menu-item.js';
+      import '../../packages/mdui/components/card.js';
+      import { $ } from '../../packages/jq/index.js';
+
+      $(() => {
+        const $dropdown = $('.manual-dropdown');
+
+        $('#manual-open').on('click', () => {
+          $dropdown.each((_, dropdown) => {
+            dropdown.open = true;
+          });
+        });
+
+        $('#manual-close').on('click', () => {
+          $dropdown.each((_, dropdown) => {
+            dropdown.open = false;
+          });
+        });
+
+        $('#default-open').on({
+          open: (e) => {
+            console.log('open event: ', e.target);
+          },
+          opened: (e) => {
+            console.log('opened event: ', e.target);
+          },
+          close: (e) => {
+            console.log('close event: ', e.target);
+          },
+          closed: (e) => {
+            console.log('closed event: ', e.target);
+          },
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <main>
+      <section>
+        <h2>default open</h2>
+        <mdui-dropdown open id="default-open">
+          <mdui-button slot="trigger">Click</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item disabled>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+      </section>
+
+      <section>
+        <h2>Trigger</h2>
+        <mdui-dropdown trigger="click">
+          <mdui-button slot="trigger">Click</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>
+              Item 3
+              <mdui-menu-item slot="submenu">Single</mdui-menu-item>
+              <mdui-menu-item slot="submenu">1.5</mdui-menu-item>
+            </mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="hover">
+          <mdui-button slot="trigger">Hover</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="focus">
+          <mdui-button slot="trigger">Focus</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="contextmenu">
+          <mdui-button slot="trigger">Contextmenu</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="click hover">
+          <mdui-button slot="trigger">Click Hover</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="click focus">
+          <mdui-button slot="trigger">Click Focus</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="click contextmenu">
+          <mdui-button slot="trigger">Click Contextmenu</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="hover focus">
+          <mdui-button slot="trigger">Hover Focus</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="hover contextmenu">
+          <mdui-button slot="trigger">Hover Contextmenu</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="focus contextmenu">
+          <mdui-button slot="trigger">Focus Contextmenu</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="click hover focus">
+          <mdui-button slot="trigger">Click Hover Focus</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="click hover contextmenu">
+          <mdui-button slot="trigger">Click Hover Contextmenu</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="click focus contextmenu">
+          <mdui-button slot="trigger">Click Focus Contextmenu</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="hover focus contextmenu">
+          <mdui-button slot="trigger">Hover Focus Contextmenu</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="click hover focus contextmenu">
+          <mdui-button slot="trigger"
+            >Click Hover Focus Contextmenu</mdui-button
+          >
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown trigger="manual" class="manual-dropdown">
+          <mdui-button slot="trigger">Manual</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <br />
+        <mdui-button variant="elevated" id="manual-open">open</mdui-button>
+        <mdui-button variant="elevated" id="manual-close">close</mdui-button>
+      </section>
+
+      <section style="padding-left: 100px">
+        <h2>Placement</h2>
+        <mdui-dropdown>
+          <mdui-button slot="trigger">Auto</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <br />
+        <mdui-dropdown placement="top-start">
+          <mdui-button slot="trigger">top-start</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown placement="top">
+          <mdui-button slot="trigger">top</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown placement="top-end">
+          <mdui-button slot="trigger">top-end</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <br />
+        <mdui-dropdown placement="bottom-start">
+          <mdui-button slot="trigger">bottom-start</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown placement="bottom">
+          <mdui-button slot="trigger">bottom</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown placement="bottom-end">
+          <mdui-button slot="trigger">bottom-end</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <br />
+        <mdui-dropdown placement="left-start">
+          <mdui-button slot="trigger">left-start</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown placement="left">
+          <mdui-button slot="trigger">left</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown placement="left-end">
+          <mdui-button slot="trigger">left-end</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <br />
+        <mdui-dropdown placement="right-start">
+          <mdui-button slot="trigger">right-start</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown placement="right">
+          <mdui-button slot="trigger">right</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown placement="right-end">
+          <mdui-button slot="trigger">right-end</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+      </section>
+
+      <section>
+        <h2>delay</h2>
+        <mdui-dropdown open-delay="1000" trigger="hover">
+          <mdui-button slot="trigger">open-delay 1000</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown close-delay="1000" trigger="hover">
+          <mdui-button slot="trigger">close-delay 1000</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+        <mdui-dropdown open-delay="1000" close-delay="1000" trigger="hover">
+          <mdui-button slot="trigger"
+            >open-delay 1000, close-delay 1000</mdui-button
+          >
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+      </section>
+
+      <section>
+        <h2>disabled</h2>
+        <mdui-dropdown disabled>
+          <mdui-button slot="trigger">Disabled</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+      </section>
+
+      <section>
+        <h2>open-on-pointer</h2>
+        <mdui-dropdown open-on-pointer trigger="contextmenu">
+          <mdui-card
+            slot="trigger"
+            variant="filled"
+            style="width: 100%; height: 200px"
+            >在此位置右键、或触摸长按</mdui-card
+          >
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+      </section>
+
+      <section>
+        <h2>含多个元素</h2>
+        <mdui-dropdown trigger="click">
+          <mdui-button slot="trigger">Click</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item>Item 2</mdui-menu-item>
+            <mdui-menu-item>Item 3</mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+      </section>
+
+      <section>
+        <h2>stay-open-on-click</h2>
+        <mdui-dropdown stay-open-on-click>
+          <mdui-button slot="trigger">stayOpenOnClick</mdui-button>
+          <mdui-menu>
+            <mdui-menu-item>Item 1</mdui-menu-item>
+            <mdui-menu-item disabled>Item 2</mdui-menu-item>
+            <mdui-menu-item>
+              Item 3
+              <mdui-menu-item slot="submenu">Single</mdui-menu-item>
+              <mdui-menu-item slot="submenu">1.5</mdui-menu-item>
+            </mdui-menu-item>
+          </mdui-menu>
+        </mdui-dropdown>
+      </section>
+
+      <section>
+        <h2>open card & div</h2>
+        <mdui-dropdown>
+          <mdui-button slot="trigger">click open card</mdui-button>
+          <mdui-card style="width: 200px; height: 200px"></mdui-card>
+        </mdui-dropdown>
+
+        <mdui-dropdown>
+          <mdui-button slot="trigger">click open div</mdui-button>
+          <div
+            style="
+              width: 200px;
+              height: 200px;
+              border: 1px solid #000;
+              background: #fff;
+            "
+          ></div>
+        </mdui-dropdown>
+
+        <mdui-dropdown trigger="hover">
+          <mdui-button slot="trigger">hover open card</mdui-button>
+          <mdui-card style="width: 200px; height: 200px"></mdui-card>
+        </mdui-dropdown>
+
+        <mdui-dropdown trigger="hover">
+          <mdui-button slot="trigger">hover open div</mdui-button>
+          <div
+            style="
+              width: 200px;
+              height: 200px;
+              border: 1px solid #000;
+              background: #fff;
+            "
+          ></div>
+        </mdui-dropdown>
+
+        <mdui-dropdown trigger="focus">
+          <mdui-button slot="trigger">focus open card</mdui-button>
+          <mdui-card style="width: 200px; height: 200px"></mdui-card>
+        </mdui-dropdown>
+
+        <mdui-dropdown trigger="focus">
+          <mdui-button slot="trigger">focus open div</mdui-button>
+          <div
+            style="
+              width: 200px;
+              height: 200px;
+              border: 1px solid #000;
+              background: #fff;
+            "
+          ></div>
+        </mdui-dropdown>
+      </section>
+    </main>
+  </body>
+</html>

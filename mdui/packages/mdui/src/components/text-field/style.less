@@ -1,0 +1,422 @@
+:host {
+  display: inline-block;
+  width: 100%;
+}
+
+:host([disabled]:not([disabled="false" i])) {
+  pointer-events: none;
+}
+
+:host([type="hidden"]) {
+  display: none;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  .padding(2, 2, 2, 16);
+  .transition(box-shadow, short4, standard);
+
+  &.has-icon {
+    .padding-left(12);
+  }
+
+  &.has-action,
+  &.has-suffix,
+  &.has-right-icon {
+    .padding-right(12);
+  }
+
+  :host([variant="filled"]) & {
+    box-shadow: inset 0 unit((-1 / @mdui-root-font-size), rem) 0 0 rgb(var(--mdui-color-on-surface-variant));
+    .background-color(surface-container-highest);
+    .shape-corner(extra-small, top);
+  }
+
+  :host([variant="outlined"]) & {
+    box-shadow: inset 0 0 0 unit((1 / @mdui-root-font-size), rem) rgb(var(--mdui-color-outline));
+    .shape-corner(extra-small);
+  }
+
+  :host([variant="filled"]) &.invalid,
+  :host([variant="filled"]) &.invalid-style {
+    box-shadow: inset 0 unit((-1 / @mdui-root-font-size), rem) 0 0 rgb(var(--mdui-color-error));
+  }
+
+  :host([variant="outlined"]) &.invalid,
+  :host([variant="outlined"]) &.invalid-style {
+    box-shadow: inset 0 0 0 unit((1 / @mdui-root-font-size), rem) rgb(var(--mdui-color-error));
+  }
+
+  :host([variant="filled"]:hover) & {
+    box-shadow: inset 0 unit((-1 / @mdui-root-font-size), rem) 0 0 rgb(var(--mdui-color-on-surface));
+  }
+
+  :host([variant="outlined"]:hover) & {
+    box-shadow: inset 0 0 0 unit((1 / @mdui-root-font-size), rem) rgb(var(--mdui-color-on-surface));
+  }
+
+  :host([variant="filled"]:hover) &.invalid,
+  :host([variant="filled"]:hover) &.invalid-style {
+    box-shadow: inset 0 unit((-1 / @mdui-root-font-size), rem) 0 0 rgb(var(--mdui-color-on-error-container));
+  }
+
+  :host([variant="outlined"]:hover) &.invalid,
+  :host([variant="outlined"]:hover) &.invalid-style {
+    box-shadow: inset 0 0 0 unit((1 / @mdui-root-font-size), rem) rgb(var(--mdui-color-on-error-container));
+  }
+
+  :host([variant="filled"][focused]) &,
+  :host([variant="filled"][focused-style]) & {
+    box-shadow: inset 0 unit((-2 / @mdui-root-font-size), rem) 0 0 rgb(var(--mdui-color-primary));
+  }
+
+  :host([variant="outlined"][focused]) &,
+  :host([variant="outlined"][focused-style]) & {
+    box-shadow: inset 0 0 0 unit((2 / @mdui-root-font-size), rem) rgb(var(--mdui-color-primary));
+  }
+
+  :host([variant="filled"][focused]) &.invalid,
+  :host([variant="filled"][focused-style]) &.invalid,
+  :host([variant="filled"][focused]) &.invalid-style,
+  :host([variant="filled"][focused-style]) &.invalid-style {
+    box-shadow: inset 0 unit((-2 / @mdui-root-font-size), rem) 0 0 rgb(var(--mdui-color-error));
+  }
+
+  :host([variant="outlined"][focused]) &.invalid,
+  :host([variant="outlined"][focused-style]) &.invalid,
+  :host([variant="outlined"][focused]) &.invalid-style,
+  :host([variant="outlined"][focused-style]) &.invalid-style {
+    box-shadow: inset 0 0 0 unit((2 / @mdui-root-font-size), rem) rgb(var(--mdui-color-error));
+  }
+
+  :host([variant="filled"][disabled]:not([disabled="false" i])) & {
+    box-shadow: inset 0 unit((-1 / @mdui-root-font-size), rem) 0 0 rgba(var(--mdui-color-on-surface), 38%);
+    .background-color(on-surface, 4%);
+  }
+
+  :host([variant="outlined"][disabled]:not([disabled="false" i])) & {
+    box-shadow: inset 0 0 0 unit((2 / @mdui-root-font-size), rem) rgba(var(--mdui-color-on-surface), 12%);
+  }
+}
+
+.icon,
+.action,
+.right-icon,
+.prefix,
+.suffix {
+  display: flex;
+  user-select: none;
+  .color(on-surface-variant);
+
+  :host([disabled]:not([disabled="false" i])) & {
+    .color(on-surface, 38%);
+  }
+}
+
+.right-icon {
+  .invalid &,
+  .invalid-style & {
+    .color(error);
+  }
+
+  :host(:hover) .invalid &,
+  :host(:hover) .invalid-style & {
+    .color(on-error-container);
+  }
+
+  :host([focused]) .invalid &,
+  :host([focused-style]) .invalid &,
+  :host([focused]) .invalid-style &,
+  :host([focused-style]) .invalid-style & {
+    .color(error);
+  }
+}
+
+.icon,
+.action,
+.right-icon {
+  .font-size(24);
+}
+
+.icon mdui-button-icon,
+.action mdui-button-icon,
+.right-icon mdui-button-icon,
+::slotted(mdui-button-icon[slot]) {
+  .margin-left(-8);
+  .margin-right(-8);
+}
+
+.icon .i,
+.action .i,
+.right-icon .i,
+::slotted([slot$="icon"]) {
+  font-size: inherit;
+}
+
+.has-icon .icon {
+  .margin-right(16);
+}
+
+.has-prefix .prefix {
+  .padding-right(2);
+}
+
+.has-action .action {
+  .margin-left(12);
+}
+
+.has-suffix .suffix {
+  .padding-right(4);
+  .padding-left(2);
+}
+
+.has-right-icon .right-icon {
+  .margin-left(12);
+}
+
+.prefix,
+.suffix {
+  display: none;
+  .typescale(body-large);
+
+  :host([variant="filled"][label]) & {
+    .padding-top(16);
+  }
+
+  .has-value &,
+  :host([focused]) &,
+  :host([focused-style]) & {
+    display: flex;
+  }
+}
+
+.input-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.label {
+  position: absolute;
+  pointer-events: none;
+  max-width: calc(100% - 1rem);
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  .transition(all, short4, standard);
+  .top(16);
+  .color(on-surface-variant);
+  .typescale(body-large);
+
+  .invalid &,
+  .invalid-style & {
+    .color(error);
+  }
+
+  :host([variant="outlined"]) & {
+    .padding(0, 4);
+    .margin(0, -4);
+  }
+
+  :host([variant="outlined"]:hover) & {
+    .color(on-surface);
+  }
+
+  :host([variant="filled"]:hover) .invalid &,
+  :host([variant="outlined"]:hover) .invalid &,
+  :host([variant="filled"]:hover) .invalid-style &,
+  :host([variant="outlined"]:hover) .invalid-style & {
+    .color(on-error-container);
+  }
+
+  :host([variant="filled"][focused]) &,
+  :host([variant="filled"][focused-style]) &,
+  :host([variant="outlined"][focused]) &,
+  :host([variant="outlined"][focused-style]) & {
+    .color(primary);
+  }
+
+  :host([variant="filled"][focused]) &,
+  :host([variant="filled"][focused-style]) &,
+  :host([variant="filled"]) .has-value &,
+  :host([variant="filled"][type="date"]) &,
+  :host([variant="filled"][type="datetime-local"]) &,
+  :host([variant="filled"][type="month"]) &,
+  :host([variant="filled"][type="time"]) &,
+  :host([variant="filled"][type="week"]) & {
+    .typescale(body-small);
+    .top(4);
+  }
+
+  :host([variant="outlined"][focused]) &,
+  :host([variant="outlined"][focused-style]) &,
+  :host([variant="outlined"]) .has-value &,
+  :host([variant="outlined"][type="date"]) &,
+  :host([variant="outlined"][type="datetime-local"]) &,
+  :host([variant="outlined"][type="month"]) &,
+  :host([variant="outlined"][type="time"]) &,
+  :host([variant="outlined"][type="week"]) & {
+    .typescale(body-small);
+    .top(-8);
+    .left(12);
+    .background-color(background);
+  }
+
+  :host([variant="filled"][focused]) .invalid &,
+  :host([variant="filled"][focused-style]) .invalid &,
+  :host([variant="outlined"][focused]) .invalid &,
+  :host([variant="outlined"][focused-style]) .invalid &,
+  :host([variant="filled"][focused]) .invalid-style &,
+  :host([variant="filled"][focused-style]) .invalid-style &,
+  :host([variant="outlined"][focused]) .invalid-style &,
+  :host([variant="outlined"][focused-style]) .invalid-style & {
+    .color(error);
+  }
+
+  :host([variant="filled"][disabled]:not([disabled="false" i])) &,
+  :host([variant="outlined"][disabled]:not([disabled="false" i])) & {
+    .color(on-surface, 38%);
+  }
+}
+
+.input {
+  display: block;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: none;
+  appearance: none;
+  resize: none;
+  cursor: inherit;
+  font-family: inherit;
+  .padding(14, 14, 14, 0);
+  .typescale(body-large);
+  .color(on-surface);
+  .caret-color(primary);
+
+  .has-action &,
+  .has-right-icon & {
+    .padding-right(4);
+  }
+
+  .has-suffix & {
+    .padding-right(0);
+  }
+
+  &.hide-input {
+    opacity: 0;
+    height: 0;
+    min-height: 0;
+    width: 0;
+    padding: 0 !important;
+    overflow: hidden;
+  }
+
+  &::placeholder {
+    .color(on-surface-variant);
+  }
+
+  .invalid &,
+  .invalid-style & {
+    .caret-color(error);
+  }
+
+  :host([disabled]:not([disabled="false" i])) & {
+    .color(on-surface, 38%);
+  }
+
+  :host([end-aligned]:not([end-aligned="false" i])) & {
+    text-align: right;
+  }
+}
+
+textarea.input {
+  padding-top: 0;
+  .margin-top(14);
+}
+
+:host([variant="filled"]) .label {
+  +.input {
+    .padding-top(22);
+    .padding-bottom(6);
+  }
+
+  +textarea.input {
+    padding-top: 0;
+    .margin-top(22);
+  }
+}
+
+.supporting {
+  display: flex;
+  justify-content: space-between;
+  .padding(4, 16);
+  .color(on-surface-variant);
+
+  &.invalid,
+  &.invalid-style {
+    .color(error);
+  }
+}
+
+.helper {
+  display: block;
+  opacity: 1;
+  .transition(opacity, short4, linear);
+  .typescale(body-small);
+
+  :host([disabled]:not([disabled="false" i])) & {
+    .color(on-surface, 38%);
+  }
+
+  :host([helper-on-focus]:not([helper-on-focus="false" i])) & {
+    opacity: 0;
+  }
+
+  :host([helper-on-focus][focused]:not([helper-on-focus="false" i])) &,
+  :host([helper-on-focus][focused-style]:not([helper-on-focus="false" i])) & {
+    opacity: 1;
+  }
+}
+
+.error {
+  .typescale(body-small);
+}
+
+.counter {
+  flex-wrap: nowrap;
+  .padding-left(16);
+  .typescale(body-small);
+
+  :host([disabled]:not([disabled="false" i])) & {
+    .color(on-surface, 38%);
+  }
+}
+
+// edge 中会默认添加密码切换按钮，隐藏掉
+::-ms-reveal {
+  display: none;
+}
+
+// 移除 input[type="number"] 时，右侧的上下箭头
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+  // stylelint-disable-next-line
+  -webkit-appearance: none;
+  display: none;
+}
+
+.input[type="number"] {
+  // stylelint-disable-next-line
+  -moz-appearance: textfield;
+}
+
+// 移除 input[type="search"] 时，右侧的清空图标
+.input[type="search"]::-webkit-search-cancel-button {
+  // stylelint-disable-next-line
+  -webkit-appearance: none;
+}

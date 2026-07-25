@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+  <title>Radio</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: Roboto;
+    }
+  </style>
+  <script type="module">
+    import '../../packages/mdui/mdui.css';
+    import '../../packages/mdui/components/radio-group.js';
+    import '../../packages/mdui/components/radio.js';
+    import '../../packages/mdui/components/button.js';
+    import { $ } from '../../packages/jq/index.js';
+
+    $(() => {
+      $('#set-checked').on('change', function () {
+        $('mdui-radio-group[name="radio4"]').val(this.value);
+      });
+
+      $('.prevent-default').on('invalid', (e) => {
+        e.preventDefault();
+      });
+
+      $('#default-value').on({
+        input: (e) => { console.log('input event: ', e.target); },
+        change: (e) => { console.log('change event: ', e.target); },
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h2>Radio Group</h2>
+      <mdui-radio-group name="radio1">
+        <mdui-radio value="one"></mdui-radio>
+        <mdui-radio value="two" no-ripple>no-ripple</mdui-radio>
+        <mdui-radio value="three" disabled></mdui-radio>
+        <mdui-radio value="four" disabled>Radio</mdui-radio>
+      </mdui-radio-group>
+      <div class="mdui-theme-dark">
+        <mdui-radio-group name="radio1-1">
+          <mdui-radio value="one"></mdui-radio>
+          <mdui-radio value="two">Radio</mdui-radio>
+          <mdui-radio value="three" disabled></mdui-radio>
+          <mdui-radio value="four" disabled>Radio</mdui-radio>
+        </mdui-radio-group>
+      </div>
+    </section>
+
+    <section>
+      <h2>Radio Group with default value</h2>
+      <mdui-radio-group name="radio2" value="two" id="default-value">
+        <mdui-radio value="one"></mdui-radio>
+        <mdui-radio value="two">Radio</mdui-radio>
+        <mdui-radio value="three" disabled></mdui-radio>
+        <mdui-radio value="four" disabled>Radio</mdui-radio>
+      </mdui-radio-group>
+      <div class="mdui-theme-dark">
+        <mdui-radio-group name="radio2-1" value="two">
+          <mdui-radio value="one"></mdui-radio>
+          <mdui-radio value="two">Radio</mdui-radio>
+          <mdui-radio value="three" disabled></mdui-radio>
+          <mdui-radio value="four" disabled>Radio</mdui-radio>
+        </mdui-radio-group>
+      </div>
+    </section>
+
+    <section>
+      <h2>Radio Group Disabled</h2>
+      <mdui-radio-group name="radio1" disabled>
+        <mdui-radio value="one"></mdui-radio>
+        <mdui-radio value="two">Radio</mdui-radio>
+        <mdui-radio value="three" disabled></mdui-radio>
+        <mdui-radio value="four" disabled>Radio</mdui-radio>
+      </mdui-radio-group>
+      <div class="mdui-theme-dark">
+        <mdui-radio-group name="radio1-1" disabled>
+          <mdui-radio value="one"></mdui-radio>
+          <mdui-radio value="two">Radio</mdui-radio>
+          <mdui-radio value="three" disabled></mdui-radio>
+          <mdui-radio value="four" disabled>Radio</mdui-radio>
+        </mdui-radio-group>
+      </div>
+    </section>
+
+    <section>
+      <h2>icon & icon slot</h2>
+      <mdui-radio-group value="chinese">
+        <mdui-radio
+          unchecked-icon="check_box_outline_blank"
+          checked-icon="lock"
+          value="chinese"
+        >Chinese</mdui-radio>
+        <mdui-radio value="english">
+          <mdui-icon slot="unchecked-icon" name="check_box_outline_blank"></mdui-icon>
+          <mdui-icon slot="checked-icon" name="lock"></mdui-icon>
+          English
+        </mdui-radio>
+      </mdui-radio-group>
+    </section>
+
+    <section>
+      <h2>Radio Group Required</h2>
+      <form>
+        <mdui-radio-group required name="radio3">
+          <mdui-radio value="one"></mdui-radio>
+          <mdui-radio value="two">Radio</mdui-radio>
+          <mdui-radio value="three" disabled></mdui-radio>
+          <mdui-radio value="four" disabled>Radio</mdui-radio>
+        </mdui-radio-group>
+        <mdui-radio-group required name="radio3-prevent" class="prevent-default">
+          <mdui-radio value="one">preventDefault()</mdui-radio>
+          <mdui-radio value="two">preventDefault()</mdui-radio>
+        </mdui-radio-group>
+        <div class="mdui-theme-dark">
+          <mdui-radio-group required name="radio3-1">
+            <mdui-radio value="one"></mdui-radio>
+            <mdui-radio value="two">Radio</mdui-radio>
+            <mdui-radio value="three" disabled></mdui-radio>
+            <mdui-radio value="four" disabled>Radio</mdui-radio>
+          </mdui-radio-group>
+          <mdui-radio-group required name="radio3-prevent" class="prevent-default">
+            <mdui-radio value="one">preventDefault()</mdui-radio>
+            <mdui-radio value="two">preventDefault()</mdui-radio>
+          </mdui-radio-group>
+        </div>
+        <br />
+        <mdui-button type="submit">Submit</mdui-button>
+      </form>
+    </section>
+
+    <section>
+      <h2>使用 js 修改 radio-group 中 radio 的 checked 属性</h2>
+      <mdui-radio-group name="radio4">
+        <mdui-radio value="one"></mdui-radio>
+        <mdui-radio value="two"></mdui-radio>
+        <mdui-radio value="three"></mdui-radio>
+      </mdui-radio-group>
+      <select id="set-checked">
+        <option>请选择</option>
+        <option>one</option>
+        <option>two</option>
+        <option>three</option>
+      </select>
+
+    </section>
+
+    <section>
+      <h2>长文本自动换行</h2>
+      <mdui-radio>长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本长文本</mdui-radio>
+    </section>
+
+  </main>
+</body>
+
+</html>

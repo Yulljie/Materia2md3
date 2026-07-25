@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+  <title>Dialog</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: Roboto;
+    }
+  </style>
+  <script type="module">
+    import '../../packages/mdui/mdui.css';
+    import '../../packages/mdui/components/dialog.js';
+    import '../../packages/mdui/components/button.js';
+    import '../../packages/mdui/components/top-app-bar.js';
+    import '../../packages/mdui/components/top-app-bar-title.js';
+    import '../../packages/mdui/components/button-icon.js';
+    import '../../packages/icons/refresh.js';
+    import { $ } from '../../packages/jq/index.js';
+
+    $(() => {
+      $('.open').on('click', function() {
+        $(this).prev()[0].open = true;
+      });
+
+      $('.close').on('click', function() {
+        $(this).parents('mdui-dialog')[0].open = false;
+      });
+
+      $('.fill-placeholder').append(...Array.from({length: 100}, (_, index) => index + 1).map(item => `<p>${item}</p>`));
+
+      $('#default-open').on({
+        open: (e) => { console.log('open event: ', e.target); },
+        opened: (e) => { console.log('opened event: ', e.target); },
+        close: (e) => { console.log('close event: ', e.target); },
+        closed: (e) => { console.log('closed event: ', e.target); },
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h2>Basic</h2>
+      <mdui-dialog></mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>Fullscreen</h2>
+      <mdui-dialog fullscreen></mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>close-on-esc</h2>
+      <mdui-dialog close-on-esc></mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>close-on-overlay-click</h2>
+      <mdui-dialog close-on-overlay-click></mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>dialog 嵌套</h2>
+      <mdui-dialog close-on-esc close-on-overlay-click>
+        <mdui-dialog close-on-esc close-on-overlay-click></mdui-dialog>
+        <mdui-button class="open">open</mdui-button>
+      </mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>no header</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+      >body</mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>icon attr</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+        icon="refresh"
+      >body</mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>icon attr & headline attr</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+        icon="refresh"
+        headline="Reset settings?"
+      >body</mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>icon attr & description attr</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+        icon="refresh"
+        description="This will reset you app preferences back to their default settings, Them following accounts will also be signed out:"
+      >body</mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>headline attr</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+        headline="Reset settings?"
+      >body</mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>headline attr & description attr</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+        headline="Reset settings?"
+        description="This will reset you app preferences back to their default settings, Them following accounts will also be signed out:"
+      >body</mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>description attr</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+        description="This will reset you app preferences back to their default settings, Them following accounts will also be signed out:"
+      >body</mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>header slot</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+      >
+        <div slot="header">Title</div>
+        <div class="fill-placeholder"></div>
+      </mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>header slot with top-app-bar</h2>
+      <mdui-dialog
+        open
+        close-on-esc
+        close-on-overlay-click
+        description="This will reset you app preferences back to their default settings, Them following accounts will also be signed out:"
+        id="default-open"
+      >
+        <!-- dialog 中的 mdui-top-app-bar 会自动设置 scroll-target 属性 -->
+        <mdui-top-app-bar slot="header" variant="small" scroll-behavior="elevate">
+          <mdui-button-icon icon="close" class="close"></mdui-button-icon>
+          <mdui-top-app-bar-title>Title</mdui-top-app-bar-title>
+          <mdui-button variant="text">Save</mdui-button>
+        </mdui-top-app-bar>
+        <div class="fill-placeholder"></div>
+      </mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>header slot with top-app-bar & fullscreen</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+        fullscreen
+        description="This will reset you app preferences back to their default settings, Them following accounts will also be signed out:"
+      >
+        <mdui-top-app-bar slot="header" variant="small" scroll-behavior="elevate">
+          <mdui-button-icon icon="close" class="close"></mdui-button-icon>
+          <mdui-top-app-bar-title>Title</mdui-top-app-bar-title>
+          <mdui-button variant="text">Save</mdui-button>
+        </mdui-top-app-bar>
+        <div class="fill-placeholder"></div>
+      </mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>header slot with top-app-bar & shrink & fullscreen</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+        fullscreen
+        description="This will reset you app preferences back to their default settings, Them following accounts will also be signed out:"
+      >
+        <mdui-top-app-bar slot="header" variant="medium" scroll-behavior="elevate shrink">
+          <mdui-button-icon icon="close" class="close"></mdui-button-icon>
+          <mdui-top-app-bar-title>Title</mdui-top-app-bar-title>
+          <mdui-button variant="text">Save</mdui-button>
+        </mdui-top-app-bar>
+        <div class="fill-placeholder"></div>
+      </mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>icon slot & headline slot & description slot</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+      >
+        <mdui-icon-refresh slot="icon"></mdui-icon-refresh>
+        <div slot="headline"><span style="color: red">Reset</span> Settings?</div>
+        <div slot="description"><span style="color: red">This</span> will reset you app preferences back to their default settings, Them following accounts will also be signed out:</div>
+      </mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>with action slot</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+        headline="Reset settings?"
+      >body
+        <mdui-button variant="text" slot="action">Cancel</mdui-button>
+        <mdui-button variant="text" slot="action">Accept</mdui-button>
+      </mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>with action slot & fullscreen</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+        fullscreen
+      >
+        <mdui-top-app-bar slot="header" scroll-behavior="elevate">
+          <mdui-button-icon icon="close" class="close"></mdui-button-icon>
+          <mdui-top-app-bar-title>Title</mdui-top-app-bar-title>
+          <mdui-button variant="text">Save</mdui-button>
+        </mdui-top-app-bar>
+        <div class="fill-placeholder"></div>
+        <mdui-button slot="action" variant="text">Accept</mdui-button>
+      </mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+
+    <section>
+      <h2>with action slot & stacked-actions</h2>
+      <mdui-dialog
+        close-on-esc
+        close-on-overlay-click
+        stacked-actions
+        headline="Reset settings?"
+      >body
+        <mdui-button variant="text" slot="action">Turn on traffic updates</mdui-button>
+        <mdui-button variant="text" slot="action">Ask again later</mdui-button>
+      </mdui-dialog>
+      <mdui-button class="open">open</mdui-button>
+    </section>
+  </main>
+</body>
+
+</html>

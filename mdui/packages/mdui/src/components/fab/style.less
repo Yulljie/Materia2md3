@@ -1,0 +1,185 @@
+/**
+ * mdui-fab 组件。默认为 variant="primary" size="normal"
+ */
+:host {
+  --shape-corner-small: var(--mdui-shape-corner-small);
+  --shape-corner-normal: var(--mdui-shape-corner-large);
+  --shape-corner-large: var(--mdui-shape-corner-extra-large);
+
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-align: center;
+  border-radius: var(--shape-corner-normal);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  // 先不启用动画，等首次渲染完后再设置 transitionProperty: width
+  // todo box-shadow 需要使用 short4 linear
+  transition-property: box-shadow;
+  .transition-timing-function(emphasized);
+  .transition-duration(medium4);
+  .width(56);
+  .height(56);
+  .elevation(3);
+  .typescale(label-large);
+}
+
+.button {
+  .padding(0, 16);
+
+  :host([size="small"]) & {
+    .padding(0, 8);
+  }
+
+  :host([size="large"]) & {
+    .padding(0, 30);
+  }
+}
+
+:host([lowered]) {
+  .elevation(1);
+}
+
+:host([focus-visible]) {
+  .elevation(3);
+}
+
+:host([lowered][focus-visible]) {
+  .elevation(1);
+}
+
+:host([pressed]) {
+  .elevation(3);
+}
+
+:host([lowered][pressed]) {
+  .elevation(1);
+}
+
+:host([hover]) {
+  .elevation(4);
+}
+
+:host([lowered][hover]) {
+  .elevation(2);
+}
+
+:host([variant="primary"]) {
+  .color(on-primary-container);
+  .background-color(primary-container);
+  .state-layer-color(on-primary-container);
+}
+
+:host([variant="surface"]) {
+  .color(primary);
+  .background-color(surface-container-high);
+  .state-layer-color(primary);
+}
+
+:host([variant="surface"][lowered]) {
+  .background-color(surface-container-low);
+}
+
+:host([variant="secondary"]) {
+  .color(on-secondary-container);
+  .background-color(secondary-container);
+  .state-layer-color(on-secondary-container);
+}
+
+:host([variant="tertiary"]) {
+  .color(on-tertiary-container);
+  .background-color(tertiary-container);
+  .state-layer-color(on-tertiary-container);
+}
+
+:host([size="small"]) {
+  border-radius: var(--shape-corner-small);
+  .width(40);
+  .height(40);
+}
+
+:host([size="large"]) {
+  border-radius: var(--shape-corner-large);
+  .width(96);
+  .height(96);
+}
+
+:host([disabled]:not([disabled="false" i])),
+:host([loading]:not([loading="false" i])) {
+  cursor: default;
+  pointer-events: none;
+}
+
+:host([disabled]:not([disabled="false" i])) {
+  .color(on-surface, 38%);
+  .background-color(on-surface, 12%);
+  .elevation(0);
+}
+
+:host([extended]:not([extended="false" i])) {
+  width: auto;
+}
+
+.label {
+  display: inline-flex;
+  .transition(opacity, short2, linear, short2);
+
+  .padding-left(4);
+  .padding-right(4);
+
+  .has-icon & {
+    .margin-left(8);
+
+    :host([size="small"]) & {
+      .margin-left(4);
+    }
+
+    :host([size="large"]) & {
+      .margin-left(16);
+    }
+  }
+
+  :host(:not([extended])) &,
+  :host([extended="false" i]) & {
+    opacity: 0;
+    transition-delay: 0ms;
+    .transition-duration(short1);
+  }
+
+  :host([size="large"]) & {
+    font-size: unit((36 / 24), em);
+  }
+}
+
+.icon {
+  display: inline-flex;
+
+  // small、normal 为 24px，文案为 14px
+  font-size: unit((24 / 14), em);
+
+  // large 为 36px，文案为 14px
+  :host([size="large"]) & {
+    font-size: unit((36 / 14), em);
+  }
+}
+
+.icon mdui-icon,
+::slotted([slot="icon"]) {
+  font-size: inherit;
+}
+
+mdui-circular-progress {
+  display: inline-flex;
+  .width(24);
+  .height(24);
+
+  :host([size="large"]) & {
+    .width(36);
+    .height(36);
+  }
+
+  :host([disabled]:not([disabled="false" i])) & {
+    .stroke(on-surface, 38%)
+  }
+}

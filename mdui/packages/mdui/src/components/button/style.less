@@ -1,0 +1,128 @@
+/**
+ * mdui-button 组件。默认为 variant="text"
+ */
+:host {
+  --shape-corner: var(--mdui-shape-corner-full);
+
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-align: center;
+  border-radius: var(--shape-corner);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  .transition(box-shadow, short4, linear);
+  .min-width(48);
+  .height(40);
+  .color(primary);
+  .typescale(label-large);
+}
+
+.button {
+  width: 100%;
+  .padding(0, 16);
+}
+
+:host([full-width]:not([full-width="false" i])) {
+  width: 100%;
+}
+
+:host([variant="elevated"]) {
+  .elevation(1);
+  .background-color(surface-container-low);
+  .state-layer-color(primary);
+}
+
+:host([variant="filled"]) {
+  .color(on-primary);
+  .background-color(primary);
+  .state-layer-color(on-primary);
+}
+
+:host([variant="tonal"]) {
+  .color(on-secondary-container);
+  .background-color(secondary-container);
+  .state-layer-color(on-secondary-container);
+}
+
+:host([variant="outlined"]) {
+  .border(1px, solid, outline);
+  .state-layer-color(primary);
+}
+
+:host([variant="text"]) {
+  .state-layer-color(primary);
+}
+
+:host([variant="outlined"][focus-visible]) {
+  .border-color(primary);
+}
+
+:host([variant="elevated"][hover]) {
+  .elevation(2);
+}
+
+:host([variant="filled"][hover]),
+:host([variant="tonal"][hover]) {
+  .elevation(1);
+}
+
+:host([disabled]:not([disabled="false" i])),
+:host([loading]:not([loading="false" i])) {
+  cursor: default;
+  pointer-events: none;
+}
+
+:host([disabled]:not([disabled="false" i])) {
+  .color(on-surface, 38%);
+  .elevation(0);
+}
+
+:host([variant="elevated"][disabled]:not([disabled="false" i])),
+:host([variant="filled"][disabled]:not([disabled="false" i])),
+:host([variant="tonal"][disabled]:not([disabled="false" i])) {
+  .background-color(on-surface, 12%);
+}
+
+:host([variant="outlined"][disabled]:not([disabled="false" i])) {
+  .border-color(on-surface, 12%);
+}
+
+.label {
+  display: inline-flex;
+  .padding-right(8);
+  .padding-left(8);
+}
+
+.icon,
+.end-icon {
+  display: inline-flex;
+  // 图标 font-size 为 18px，文案为 14px
+  font-size: unit((18 / 14), em);
+}
+
+.icon mdui-icon,
+.end-icon mdui-icon,
+::slotted([slot="icon"]),
+::slotted([slot="end-icon"]) {
+  font-size: inherit;
+}
+
+mdui-circular-progress {
+  display: inline-flex;
+  .width(18);
+  .height(18);
+
+  :host([variant="filled"]) & {
+    .stroke(on-primary);
+  }
+
+  :host([variant="tonal"]) & {
+    .stroke(on-secondary-container);
+  }
+
+  :host([disabled]:not([disabled="false" i])) & {
+    .stroke(on-surface, 38%)
+  }
+}

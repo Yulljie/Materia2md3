@@ -1,0 +1,81 @@
+/**
+ * mdui-card 组件。默认为 variant="elevated"
+ */
+:host {
+  --shape-corner: var(--mdui-shape-corner-medium);
+
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: var(--shape-corner);
+  -webkit-tap-highlight-color: transparent;
+  .transition(box-shadow, short4, linear);
+  .state-layer-color(on-surface);
+}
+
+:host([clickable]:not([clickable="false" i])) {
+  cursor: pointer;
+}
+
+:host([variant="elevated"]) {
+  .background-color(surface-container-low);
+  .elevation(1);
+}
+
+:host([variant="filled"]) {
+  .background-color(surface-container-highest);
+}
+
+:host([variant="outlined"]) {
+  .background-color(surface);
+  .border(1px, solid, outline);
+}
+
+:host([variant="elevated"][hover]) {
+  .elevation(2);
+}
+
+:host([variant="filled"][hover]),
+:host([variant="outlined"][hover]) {
+  .elevation(1);
+}
+
+:host([variant="elevated"][dragged]),
+:host([variant="filled"][dragged]),
+:host([variant="outlined"][dragged]) {
+  .elevation(3);
+}
+
+:host([disabled]:not([disabled="false" i])) {
+  opacity: 0.38;
+  cursor: default;
+  user-select: none;
+}
+
+:host([variant="elevated"][disabled]:not([disabled="false" i])) {
+  .background-color(surface-variant);
+  .elevation(0);
+}
+
+:host([variant="filled"][disabled]:not([disabled="false" i])) {
+  .background-color(surface);
+  .elevation(1);
+}
+
+:host([variant="outlined"][disabled]:not([disabled="false" i])) {
+  .elevation(0);
+  .border-color(outline, 0.32);
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  text-decoration: none;
+  touch-action: manipulation;
+  -webkit-user-drag: none;
+}

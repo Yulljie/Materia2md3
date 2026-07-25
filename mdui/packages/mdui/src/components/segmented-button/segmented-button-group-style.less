@@ -1,0 +1,26 @@
+:host {
+  --shape-corner: var(--mdui-shape-corner-full);
+
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  .height(40);
+  .typescale(label-large);
+  .color(on-surface);
+  .state-layer-color(on-surface);
+}
+
+:host([full-width]:not([full-width="false" i])) {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+input,
+select {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+}

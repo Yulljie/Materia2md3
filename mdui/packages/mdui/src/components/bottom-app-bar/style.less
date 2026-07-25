@@ -1,0 +1,84 @@
+:host {
+  --shape-corner: var(--mdui-shape-corner-none);
+  --z-index: 2000;
+
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: var(--shape-corner) var(--shape-corner) 0 0;
+  z-index: var(--z-index);
+  .transition(transform, long2, emphasized);
+  .padding(0, 16);
+  .height(80);
+  .background-color(surface-container);
+  .elevation(2);
+}
+
+:host([scroll-target]:not([scroll-target=""])) {
+  position: absolute;
+}
+
+:host([hide]:not([hide="false" i])) {
+  .transition-duration(short4);
+  .translate-y(80 + 10);
+}
+
+::slotted(:not(:first-child)) {
+  .margin-left(8);
+}
+
+::slotted(mdui-fab) {
+  .elevation(0);
+}
+
+// 含 fab-detach 属性时，fab 脱离 bottom-app-bar
+:host([fab-detach]:not([fab-detach="false" i])) {
+  ::slotted(mdui-fab) {
+    .transition(transform, long2, standard);
+  }
+}
+
+:host([fab-detach][hide][scroll-behavior~="hide"]:not([hide="false" i], [fab-detach="false" i])) {
+  ::slotted(mdui-fab) {
+    .transition-duration(short4);
+    .elevation(2);
+    .translate-y(-80 - 10 - 4);
+  }
+}
+
+// 显示 bottom-app-bar 时，子元素依次进入
+:host([hide]:not([hide="false" i])) ::slotted(:not(mdui-fab)),
+:host([hide]:not([hide="false" i], [fab-detach])) ::slotted(mdui-fab),
+:host([hide][fab-detach="false" i]:not([hide="false" i])) ::slotted(mdui-fab) {
+  transform: translateY(unit((140px / @mdui-root-font-size), rem));
+  .transition(transform, 0, emphasized-accelerate, short4);
+}
+
+::slotted(:first-child) {
+  .transition(transform, short3, emphasized-decelerate, short1);
+}
+
+::slotted(:nth-child(2)) {
+  .transition(transform, short3, emphasized-decelerate, short3);
+}
+
+::slotted(:nth-child(3)) {
+  .transition(transform, short3, emphasized-decelerate, short4);
+}
+
+::slotted(:nth-child(4)) {
+  .transition(transform, short3, emphasized-decelerate, medium1);
+}
+
+::slotted(:nth-child(5)) {
+  .transition(transform, short3, emphasized-decelerate, medium2);
+}
+
+::slotted(:nth-child(6)) {
+  .transition(transform, short3, emphasized-decelerate, medium3);
+}

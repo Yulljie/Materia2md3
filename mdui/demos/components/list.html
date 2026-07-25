@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+  <title>List</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: Roboto;
+    }
+
+    mdui-list {
+      width: 375px;
+    }
+
+    @media (max-width: 750px) {
+      mdui-list {
+        width: 100%;
+      }
+    }
+  </style>
+  <script type="module">
+    import '../../packages/mdui/mdui.css';
+    import '../../packages/mdui/components/checkbox.js';
+    import '../../packages/mdui/components/radio.js';
+    import '../../packages/mdui/components/switch.js';
+    import '../../packages/mdui/components/avatar.js';
+    import '../../packages/mdui/components/icon.js';
+    import '../../packages/mdui/components/list.js';
+    import '../../packages/mdui/components/list-item.js';
+    import '../../packages/mdui/components/list-subheader.js';
+    import '../../packages/mdui/components/divider.js';
+    import '../../packages/icons/settings.js';
+    import { $ } from '../../packages/jq/index.js';
+
+    $(() => {
+      $('#change-nonclickable').on('change', function () {
+        $('mdui-list-item').prop('nonclickable', $(this).prop('checked'));
+      });
+
+      $('#change-rounded').on('change', function () {
+        $('mdui-list-item').prop('rounded', $(this).prop('checked'));
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <main>
+    <section>
+      <mdui-checkbox id="change-nonclickable">不可点击</mdui-checkbox>
+      <mdui-checkbox id="change-rounded">圆角</mdui-checkbox>
+    </section>
+
+    <section>
+      <h2>Normal</h2>
+      <mdui-list>
+        <mdui-list-item
+          headline-line="1"
+          headline="headline one line. headline one line. headline one line. headline one line. headline one line."
+        ></mdui-list-item>
+        <mdui-list-item
+          headline-line="2"
+          headline="headline two line. headline two line. headline two line. headline two line. headline two line. headline two line."
+        ></mdui-list-item>
+        <mdui-list-item
+          headline-line="3"
+          headline="headline three line. headline three line. headline three line. headline three line. headline three line. headline three line. headline three line. headline three line."
+        ></mdui-list-item>
+        <mdui-list-item
+          headline="headline unlimited line. headline unlimited line. headline unlimited line. headline unlimited line. headline unlimited line. headline unlimited line. headline unlimited line. headline unlimited line. headline unlimited line. headline unlimited line. headline unlimited line."
+        ></mdui-list-item>
+        <mdui-list-item
+          description-line="1"
+          headline="headline"
+          description="description one line. description one line. description one line. description one line."
+        ></mdui-list-item>
+        <mdui-list-item
+          description-line="2"
+          headline="headline"
+          description="description two line. description two line. description two line. description two line. description two line. description two line."
+        ></mdui-list-item>
+        <mdui-list-item
+          description-line="3"
+          headline="headline"
+          description="description three line. description three line. description three line. description three line. description three line. description three line. description three line. "
+        ></mdui-list-item>
+        <mdui-list-item
+          headline="headline"
+          description="description unlimited line. description unlimited line. description unlimited line. description unlimited line. description unlimited line. description unlimited line. description unlimited line. description unlimited line. description unlimited line. description unlimited line."
+        ></mdui-list-item>
+        <mdui-list-item>headline slot<span slot="description">description slot</span></mdui-list-item>
+        <mdui-list-item icon="settings" end-icon="settings" description="description">icon & endIcon property</mdui-list-item>
+        <mdui-list-item
+          no-ripple
+          headline="no-ripple"
+        ></mdui-list-item>
+      </mdui-list>
+    </section>
+
+    <section>
+      <h2>State</h2>
+      <mdui-list>
+        <mdui-list-item>Normal</mdui-list-item>
+        <mdui-list-item disabled>Disabled</mdui-list-item>
+        <mdui-list-item nonclickable active>Nonclickable and active</mdui-list-item>
+        <mdui-list-item nonclickable>Nonclickable</mdui-list-item>
+        <mdui-list-item active>Active</mdui-list-item>
+
+        <mdui-divider></mdui-divider>
+        <mdui-list-subheader>Link</mdui-list-subheader>
+        <mdui-list-item href="https://www.mdui.org">Normal</mdui-list-item>
+        <mdui-list-item href="https://www.mdui.org" disabled>Disabled</mdui-list-item>
+        <mdui-list-item href="https://www.mdui.org" nonclickable active>Nonclickable and active</mdui-list-item>
+        <mdui-list-item href="https://www.mdui.org" nonclickable>Nonclickable</mdui-list-item>
+        <mdui-list-item href="https://www.mdui.org" active>Active</mdui-list-item>
+      </mdui-list>
+    </section>
+
+    <section>
+      <h2>headline and description with html</h2>
+      <mdui-list>
+        <mdui-list-item>
+          <div style="color: red">Brunch this weekend?</div>
+          <div slot="description" style="font-size: 14px;"><span style="font-weight: bold; font-size: 12px;">Ali Connors —
+            </span>I'll be in your neighborhood doing errands this weekend. Do you want to hang out?</div>
+        </mdui-list-item>
+      </mdui-list>
+    </section>
+
+    <section>
+      <h2>Custom content</h2>
+      <mdui-list>
+        <mdui-list-item>
+          <div style="display: flex;" slot="custom">
+            <img src="https://avatars.githubusercontent.com/u/3030330?s=40&v=4" />
+            <div>test</div>
+          </div>
+        </mdui-list-item>
+      </mdui-list>
+    </section>
+
+    <section>
+      <h2>With start slot</h2>
+      <mdui-list>
+        <mdui-list-item headline="List item">
+          <mdui-checkbox slot="icon" tabindex="-1"></mdui-checkbox>
+        </mdui-list-item>
+        <mdui-list-item headline="List item" description="description">
+          <mdui-radio slot="icon"></mdui-radio>
+        </mdui-list-item>
+        <mdui-list-item
+          headline="List item long long long long long long long long long long"
+          description="description long long long long long long long long long long long long"
+        >
+          <mdui-switch slot="icon"></mdui-switch>
+        </mdui-list-item>
+        <mdui-list-item headline="List item">
+          <mdui-icon slot="icon" name="settings"></mdui-icon>
+        </mdui-list-item>
+        <mdui-list-item headline="List item">
+          <mdui-avatar slot="icon">M</mdui-avatar>
+        </mdui-list-item>
+        <mdui-list-item headline="List item">
+          <mdui-avatar slot="icon" src="https://avatars.githubusercontent.com/u/3030330?s=40&v=4"></mdui-avatar>
+        </mdui-list-item>
+        <mdui-list-item headline="List item">
+          <img slot="icon" src="https://avatars.githubusercontent.com/u/3030330?s=40&v=4" />
+        </mdui-list-item>
+        <mdui-list-item headline="List item">
+          <span slot="icon">text</span>
+        </mdui-list-item>
+      </mdui-list>
+    </section>
+
+    <section>
+      <h2>With end slot</h2>
+      <mdui-list>
+        <mdui-list-item headline="List item">
+          <mdui-checkbox slot="end-icon"></mdui-checkbox>
+        </mdui-list-item>
+        <mdui-list-item headline="List item" description="description">
+          <mdui-radio slot="end-icon"></mdui-radio>
+        </mdui-list-item>
+        <mdui-list-item
+          headline="List item long long long long long long long long long long"
+          description="description long long long long long long long long long long long long"
+        >
+          <mdui-switch slot="end-icon"></mdui-switch>
+        </mdui-list-item>
+        <mdui-list-item headline="List item">
+          <mdui-icon-settings slot="end-icon"></mdui-icon-settings>
+        </mdui-list-item>
+        <mdui-list-item headline="List item">
+          <mdui-avatar slot="end-icon">M</mdui-avatar>
+        </mdui-list-item>
+        <mdui-list-item headline="List item">
+          <mdui-avatar slot="end-icon" src="https://avatars.githubusercontent.com/u/3030330?s=40&v=4"></mdui-avatar>
+        </mdui-list-item>
+        <mdui-list-item headline="List item">
+          <img slot="end-icon" src="https://avatars.githubusercontent.com/u/3030330?s=40&v=4" />
+        </mdui-list-item>
+        <mdui-list-item headline="List item">
+          <span slot="end-icon">text</span>
+        </mdui-list-item>
+      </mdui-list>
+    </section>
+
+    <section>
+      <h2>With start and end slot</h2>
+      <mdui-list>
+        <mdui-list-item headline="List item">
+          <mdui-checkbox slot="icon"></mdui-checkbox>
+          <span slot="end-icon">text</span>
+        </mdui-list-item>
+        <mdui-list-item headline="List item" description="description">
+          <mdui-radio slot="icon"></mdui-radio>
+          <mdui-icon slot="end-icon" name="settings"></mdui-icon>
+        </mdui-list-item>
+        <mdui-list-item
+          headline="List item long long long long long long long long long long"
+          description="description long long long long long long long long long long long long"
+        >
+          <mdui-avatar slot="icon" src="https://avatars.githubusercontent.com/u/3030330?s=40&v=4"></mdui-avatar>
+          <mdui-switch slot="end-icon"></mdui-switch>
+        </mdui-list-item>
+        <mdui-list-item headline="List item">
+          <mdui-icon slot="icon" name="settings"></mdui-icon>
+          <span slot="end-icon">text</span>
+        </mdui-list-item>
+        <mdui-list-item headline="List item">
+          <img slot="icon" src="https://avatars.githubusercontent.com/u/3030330?s=40&v=4" />
+          <mdui-checkbox slot="end-icon"></mdui-checkbox>
+        </mdui-list-item>
+      </mdui-list>
+    </section>
+
+    <section>
+      <h2>alignItems</h2>
+      <mdui-list>
+        <mdui-list-item
+          headline="alignItems:center"
+          description="description long long long long long long long long long long long long"
+          alignment="center"
+        >
+          <mdui-radio slot="icon"></mdui-radio>
+          <mdui-checkbox slot="end-icon"></mdui-checkbox>
+        </mdui-list-item>
+        <mdui-list-item
+          headline="alignItems:flex-start"
+          description="description long long long long long long long long long long long long"
+          alignment="start"
+        >
+          <mdui-radio slot="icon"></mdui-radio>
+          <mdui-checkbox slot="end-icon"></mdui-checkbox>
+        </mdui-list-item>
+        <mdui-list-item
+          headline="alignItems:flex-end"
+          description="description long long long long long long long long long long long long"
+          alignment="end"
+        >
+          <mdui-radio slot="icon"></mdui-radio>
+          <mdui-checkbox slot="end-icon"></mdui-checkbox>
+        </mdui-list-item>
+      </mdui-list>
+    </section>
+  </main>
+</body>
+
+</html>
