@@ -23,7 +23,7 @@ Materia2md3/
 │       ├── styles/               # color.less, shape.less, elevation.less, state.less
 │       └── components/           # Component-specific styles (button, switch, dialog, top-app-bar, etc.)
 ├── change_color.sh               # Theme color preset generator
-├── render-assets.sh              # Asset切图与渲染脚本
+├── render-assets.sh              # Assets renderer
 ├── TODO.md                       # Active roadmap and checklist
 └── meson.build                   # Meson build system configuration
 ```
@@ -63,17 +63,19 @@ When implementing or modifying theme styles, strictly adhere to the following MD
 
 ### Build Project
 ```bash
-# Clean build and compile
-rm -rf build && meson setup build && ninja -C build
+# Configure to /tmp
+meson _build -Dprefix="/tmp/Materia2md3" -Dcolors=default,dark -Dsizes=default,compact 
+# Build
+meson install -C _build
 ```
 
 ### Visual Verification
 ```bash
 # Verify GTK3 Widgets
-GTK_THEME=Materia-dark-compact gtk3-widget-factory
+GTK_DATA_PREFIX=/tmp/Materia2md3/ GTK_THEME=Materia-dark-compact gtk3-widget-factory
 
 # Verify GTK4 Widgets
-GTK_THEME=Materia-dark-compact gtk4-widget-factory
+GTK_DATA_PREFIX=/tmp/Materia2md3/ GTK_THEME=Materia-dark-compact gtk4-widget-factory
 
 # Verify Libadwaita Widgets (if adw-1-demo is installed)
 adw-1-demo
