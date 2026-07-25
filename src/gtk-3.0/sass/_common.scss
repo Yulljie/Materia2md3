@@ -338,7 +338,7 @@ spinner {
 entry {
   min-height: theme.$medium-size;
   padding: 0 8px;
-  border-radius: theme.$corner-radius theme.$corner-radius 0 0;
+  border-radius: theme.$circular-radius theme.$circular-radius theme.$circular-radius theme.$circular-radius;
 
   @include drawing.entry(normal);
 
@@ -562,7 +562,7 @@ button {
   min-height: 24px;
   min-width: 16px;
   padding: (theme.$medium-size - 24px) / 2 (theme.$medium-size - 16px) / 2;
-  border-radius: theme.$corner-radius;
+  border-radius: theme.$circular-radius;
   color: theme-color.$on-surface;
   font-weight: 500;
 
@@ -591,6 +591,7 @@ button {
     min-width: 64px - 16px * 2;
     padding-left: 16px;
     padding-right: 16px;
+    border-radius: theme.$circular-radius;
   }
 
   &.image-button {
@@ -1188,7 +1189,7 @@ combobox {
   }
 
   > .linked:not(.vertical) > entry:not(:only-child) {
-    border-radius: theme.$corner-radius theme.$corner-radius 0 0;
+    border-radius: theme.$circular-radius theme.$circular-radius theme.$circular-radius theme.$circular-radius;
 
     &:first-child {
       margin-right: -(theme.$medium-size);
@@ -1238,7 +1239,7 @@ combobox {
 }
 
 button.combo:only-child {
-  border-radius: theme.$corner-radius theme.$corner-radius 0 0;
+  border-radius: theme.$circular-radius theme.$circular-radius theme.$circular-radius theme.$circular-radius;
   font-weight: normal;
 
   @include drawing.entry(normal);
