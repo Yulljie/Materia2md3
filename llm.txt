@@ -1,0 +1,90 @@
+# Materia2md3 - LLM Agent Context & Guidelines
+
+> **Project Goal**: Transform Nana-4's Materia Theme (originally Material Design 2) into a modern, full-featured Material Design 3 (MD3 / Material You) theme for GTK3, GTK4, Libadwaita, and GNOME Shell.
+
+---
+
+## 📁 Repository Directory Structure
+
+```
+Materia2md3/
+├── src/                          # Main theme source code (SCSS & assets)
+│   ├── _color-palette.scss       # Base Material color palette definitions
+│   ├── _theme-color.scss         # Global MD3 Color Roles & Token Mapping (Primary, Surface, etc.)
+│   ├── _shadow.scss              # MD3 Elevation shadows
+│   ├── _theme.scss               # Global border radius ($corner-radius)
+│   ├── gtk-3.0/                  # GTK3 theme implementation
+│   │   └── sass/_common.scss     # GTK3 widget selectors & styles
+│   ├── gtk-4.0/                  # GTK4 theme implementation
+│   │   └── sass/_common.scss     # GTK4 widget selectors & styles (Popover, ListView, WindowControls)
+│   └── gnome-shell/              # GNOME Shell desktop theme
+├── mdui/                         # MDUI 2.0 reference source code (Material Design 3 Web Specs)
+│   └── packages/mdui/src/
+│       ├── styles/               # color.less, shape.less, elevation.less, state.less
+│       └── components/           # Component-specific styles (button, switch, dialog, top-app-bar, etc.)
+├── change_color.sh               # Theme color preset generator
+├── render-assets.sh              # Asset切图与渲染脚本
+├── TODO.md                       # Active roadmap and checklist
+└── meson.build                   # Meson build system configuration
+```
+
+---
+
+## 🎨 Material Design 3 (MD3) Design Tokens & Standards
+
+When implementing or modifying theme styles, strictly adhere to the following MD3 specs:
+
+### 1. Color Roles
+- **Primary**: Main brand accent (`$primary`, `$on-primary`, `$primary-container`, `$on-primary-container`).
+- **Surface & Containers**:
+  - `Surface`: Main background (`#FEF7FF` Light / `#141218` Dark)
+  - `Surface Container Lowest`: Lowest elevation card/view
+  - `Surface Container Low`: `#F7F2FA` Light / `#1D1B20` Dark
+  - `Surface Container`: `#F3EDF7` Light / `#211F26` Dark
+  - `Surface Container High`: `#ECE6F0` Light / `#2B2930` Dark
+  - `Surface Container Highest`: `#E6E0E9` Light / `#36343B` Dark (Dialogs, Popovers, Entries)
+- **Outline**: `#79747E` Light / `#938F99` Dark (Borders for Outlined Cards, Buttons, Entries)
+
+### 2. State Layer Opacity (Overlay)
+- **Hover**: 8% (`0.08`) opacity overlay
+- **Focus**: 12% (`0.12`) opacity overlay / ring
+- **Active / Pressed**: 12% (`0.12`) opacity overlay
+- **Dragged**: 16% (`0.16`) opacity overlay
+
+### 3. Corner Radii (Border Radius)
+- **Buttons / Switches**: `20px` or `9999px` (Pill / Full round)
+- **Cards**: `12px` (Medium) / `16px` (Large)
+- **Dialogs, Menus, Popovers**: `28px` (Extra Large)
+- **Entries / Textfields**: `4px` top corners (Filled) or `8px` / `12px` all around (Outlined)
+
+---
+
+## 🛠️ Build & Verification Commands
+
+### Build Project
+```bash
+# Clean build and compile
+rm -rf build && meson setup build && ninja -C build
+```
+
+### Visual Verification
+```bash
+# Verify GTK3 Widgets
+GTK_THEME=Materia-dark-compact gtk3-widget-factory
+
+# Verify GTK4 Widgets
+GTK_THEME=Materia-dark-compact gtk4-widget-factory
+
+# Verify Libadwaita Widgets (if adw-1-demo is installed)
+adw-1-demo
+```
+
+---
+
+## 📖 Useful Reference Codebase (`mdui/`)
+
+When in doubt about MD3 specs or CSS values, inspect files in `mdui/`:
+- Color Tokens: `mdui/packages/mdui/src/styles/color.less`
+- Corner Radii: `mdui/packages/mdui/src/styles/shape.less`
+- State Layers: `mdui/packages/mdui/src/styles/state.less`
+- Component Styles: `mdui/packages/mdui/src/components/<component-name>/`

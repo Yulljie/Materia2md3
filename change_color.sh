@@ -69,19 +69,8 @@ fi
 
 PATHLIST=(
   './src/_theme-color.scss'
-  './src/chrome'
-  './src/cinnamon'
-  './src/cinnamon/assets'
   './src/gnome-shell'
-  './src/gtk-2.0/assets.svg'
-  './src/gtk-2.0/assets-dark.svg'
-  './src/gtk-2.0/gtkrc'
-  './src/gtk-2.0/gtkrc-dark'
-  './src/gtk-2.0/gtkrc-light'
   './src/gtk-3.0/assets.svg'
-  './src/metacity-1'
-  './src/unity'
-  './src/xfwm4'
 )
 if [[ -n "${CUSTOM_PATHLIST:-}" ]]; then
   IFS=', ' read -r -a PATHLIST <<< "${CUSTOM_PATHLIST:-}"
@@ -271,30 +260,12 @@ if [[ "$MATERIA_COLOR_VARIANT" == "dark" ]]; then
   COLOR_VARIANT="dark"
   COLOR_SUFFIX="-dark"
 fi
-if [[ "$OPTION_GTK2_HIDPI" == "true" ]]; then
-  mv ./src/gtk-2.0/main.rc.hidpi ./src/gtk-2.0/main.rc
-fi
-if [[ "$EXPORT_QT5CT" = 1 ]]; then
-  config_home=${XDG_CONFIG_HOME:-"$HOME/.config"}
-  qt5ct_colors_dir="$config_home/qt5ct/colors/"
-  test -d "$qt5ct_colors_dir" || mkdir -p "$qt5ct_colors_dir"
-  mv ./src/qt5ct_palette.conf "$qt5ct_colors_dir/$OUTPUT_THEME_NAME.conf"
-fi
-
 if [[ "$MATERIA_STYLE_COMPACT" == "true" ]]; then
   SIZE_VARIANT="compact"
   SIZE_SUFFIX="-compact"
 else
   SIZE_VARIANT="default"
   SIZE_SUFFIX=""
-fi
-
-# NOTE we use the functions we already have in render-assets.sh
-echo "== Rendering GTK 2 assets..."
-if [[ "$MATERIA_COLOR_VARIANT" != "dark" ]]; then
-  FORCE_INKSCAPE="$OPTION_FORCE_INKSCAPE" GTK2_HIDPI="$OPTION_GTK2_HIDPI" ./render-assets.sh gtk2-light
-else
-  FORCE_INKSCAPE="$OPTION_FORCE_INKSCAPE" GTK2_HIDPI="$OPTION_GTK2_HIDPI" ./render-assets.sh gtk2-dark
 fi
 
 echo "== Rendering GTK 3 assets..."
