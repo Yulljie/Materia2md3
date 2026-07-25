@@ -37,12 +37,28 @@
 ---
 
 ## 4. GTK4 的 MD3 化 (GTK4 MD3 Transformation)
-- [ ] 同步并复用 MD3 SCSS Token 字典
-- [ ] 重构 GTK4 `popover` / `popover.menu` 样式（28px 圆角与状态层）
-- [ ] 适配 GTK4 `ListView` / `GridView` / `ColumnView` 选中行胶囊指示器
-- [ ] 适配 GTK4 `windowcontrols` 标题栏按钮布局
-- [ ] 适配 GTK4 `DropDown` 与 `SpinButton` 控件样式
-> **检验方法**：运行 `GTK_THEME=Materia-md3 gtk4-widget-factory` 或 `gtk4-demo`，检查浮层菜单、列表与窗口控件。
+- [x] **MD3 Token 字典架构集中化**
+  - [x] 新增集中定义文件 `src/_md3-tokens.scss`，统一定义 Primary, Surface Container (Lowest/Low/Normal/High/Highest), Outline 与 State Layers
+  - [x] 更新 `src/_theme-color.scss` 及 `src/_theme-color.template.scss` 映射字典
+- [x] **基础按钮与选择控件 (`button`, `switch`, `check`, `radio`)**
+  - [x] GTK4 Filled / Tonal / Outlined / Text (Flat) 按钮重构（`9999px` 胶囊圆角与 8% State Layer）
+  - [x] GTK4 Switch 开关（MD3 比例滑块与轨道、开/关态分色）
+  - [x] GTK4 Checkbox 与 Radio（圆角矩形/圆形与水波动画）
+- [x] **输入框与容器 (`entry`, `search-entry`, `.card`, `frame`)**
+  - [x] GTK4 Filled Entry (底部线条) 与 Outlined Entry (1px 描边/高亮) 样式
+  - [x] GTK4 Search Entry (9999px 全圆角胶囊搜索框)
+  - [x] GTK4 Outlined Card (12px/16px 圆角与 `$outline-variant` 边框) 及 Elevated Card
+- [x] **顶栏与窗口控制 (`headerbar`, `windowcontrols`, `actionbar`)**
+  - [x] GTK4 HeaderBar 扁平 Surface 背景与 MD3 Top App Bar 视觉
+  - [x] GTK4 `windowcontrols` 标题栏按钮（`30px` 圆形 Pill 按钮与 hover 交互）
+- [x] **浮层、菜单与对话框 (`popover`, `popover.menu`, `dialog`)**
+  - [x] GTK4 `popover` 28px 大圆角（MD3 Extra Large）与 Level 3 浮层阴影
+  - [x] GTK4 `popover.menu` 菜单项 `modelbutton` 胶囊状 hover/active 悬浮高亮
+- [x] **列表、微调框与下拉框 (`listview`, `gridview`, `columnview`, `dropdown`, `spinbutton`)**
+  - [x] GTK4 `ListView` / `GridView` / `ColumnView` 选中行胶囊悬浮指示器 (`margin: 2px 6px`, `9999px` 圆角)
+  - [x] GTK4 `DropDown` 卡片按钮与 28px 大圆角浮层
+  - [x] GTK4 `SpinButton` 横向/纵向连体与分体胶囊微调框
+> **检验结果**：重新编译并安装至 `~/.local/share/themes/` 与 `~/.themes/` 成功。运行 `GTK_DATA_PREFIX=/home/ray/.local GTK_THEME=Materia-dark gtk4-widget-factory` 或 `nwg-look` 验证通过。
 
 ---
 

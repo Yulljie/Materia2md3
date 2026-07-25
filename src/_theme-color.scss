@@ -5,6 +5,8 @@
 @use "sass:math";
 @use "sass:string";
 @use "theme";
+@forward "md3-tokens";
+@use "md3-tokens";
 
 @function gtkalpha($color, $alpha) {
   @return string.unquote("alpha(#{$color}, #{$alpha})");
@@ -55,22 +57,22 @@ $on-dark: #fff;
 }
 
 //
-// Main colors
+// Main colors (MD3 Standards)
 //
 
-$surface-z0: #f9f9f9;
-$surface-z1: #fff;
-$surface-z8: #fff;
+$surface-z0: md3-tokens.$md3-surface-light;
+$surface-z1: md3-tokens.$md3-surface-container-low-light;
+$surface-z8: md3-tokens.$md3-surface-container-highest-light;
 $surface-switch-thumb: #fff;
-$on-surface: on($surface-z0);
+$on-surface: md3-tokens.$md3-on-surface-light;
 
-$primary-on-light: #1967d2;
-$primary-on-dark: #8ab4f8;
+$primary-on-light: md3-tokens.$md3-primary-light;
+$primary-on-dark: md3-tokens.$md3-primary-dark;
 $primary: $primary-on-light;
 $on-primary: on($primary);
 
-$error-on-light: #d93025;
-$error-on-dark: #f28b82;
+$error-on-light: md3-tokens.$md3-error-light;
+$error-on-dark: md3-tokens.$md3-error-dark;
 $error: $error-on-light;
 $on-error: on($error);
 
@@ -89,11 +91,11 @@ $visited-on-dark: #c58af9;
 $visited: $visited-on-light;
 $on-visited: on($visited);
 
-$system: #212121;
-$on-system: on($system);
+$system: md3-tokens.$md3-surface-container-high-light;
+$on-system: $on-surface;
 
-$tooltip: rgba(#616161, .9);
-$on-tooltip: on($tooltip);
+$tooltip: rgba(#313033, .9);
+$on-tooltip: #f4eff4;
 
 $scrim: rgba(black, .6);
 $on-scrim: on($scrim);
@@ -101,25 +103,24 @@ $on-scrim: on($scrim);
 $scrim-alt: rgba(black, .3);
 $on-scrim-alt: on($scrim-alt);
 
-$panel: #212121;
-$on-panel: on($panel);
+$panel: $surface-z0;
+$on-panel: $on-surface;
 
-// for Unity panel which doesn't allow translucent colors
-$panel-solid: $panel;
-$on-panel-solid: on($panel-solid);
+$panel-solid: $surface-z0;
+$on-panel-solid: $on-surface;
 
-$titlebar: #424242;
-$titlebar-backdrop: #303030;
-$on-titlebar: on($titlebar);
+$titlebar: $surface-z0;
+$titlebar-backdrop: $surface-z0;
+$on-titlebar: $on-surface;
 
-$titlebar-indicator: currentcolor;
+$titlebar-indicator: $primary;
 
 @if theme.$dark-theme {
-  $surface-z0: #121212;
-  $surface-z1: color.mix(white, $surface-z0, 5%);
-  $surface-z8: color.mix(white, $surface-z0, 12%);
+  $surface-z0: md3-tokens.$md3-surface-dark;
+  $surface-z1: md3-tokens.$md3-surface-container-low-dark;
+  $surface-z8: md3-tokens.$md3-surface-container-highest-dark;
   $surface-switch-thumb: color.mix(white, $surface-z0, 60%);
-  $on-surface: on($surface-z0);
+  $on-surface: md3-tokens.$md3-on-surface-dark;
 
   $primary: $primary-on-dark;
   $on-primary: on($primary);
@@ -136,9 +137,9 @@ $titlebar-indicator: currentcolor;
   $visited: $visited-on-dark;
   $on-visited: on($visited);
 
-  $titlebar: color.mix(white, $surface-z0, 9%);
-  $titlebar-backdrop: $surface-z1;
-  $on-titlebar: on($titlebar);
+  $titlebar: $surface-z0;
+  $titlebar-backdrop: $surface-z0;
+  $on-titlebar: $on-surface;
 }
 
 @if theme.$light-topbar {

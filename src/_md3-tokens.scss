@@ -1,0 +1,108 @@
+// ============================================================================
+// Material Design 3 (MD3 / Material You) Design Tokens & Standards
+// Reference: MD3 Web Specs & mdui (https://md3.glitch.me/)
+// ============================================================================
+
+@use "sass:color";
+@use "sass:math";
+@use "theme";
+
+// ----------------------------------------------------------------------------
+// 1. Shape Corner Radii (MD3 标准圆角规格)
+// ----------------------------------------------------------------------------
+
+$corner-none: 0px !default;
+$corner-xs:   4px !default;   // Badges, Tooltips
+$corner-s:    8px !default;   // Checkboxes, Small Cards, Outlined Entry
+$corner-m:    12px !default;  // Cards, DropDowns, Medium Containers
+$corner-l:    16px !default;  // Large Cards, Nav Drawers
+$corner-xl:   28px !default;  // Popovers, Menus, Dialogs, Floating Panels
+$corner-full: 9999px !default; // Buttons, Chips, Switches, Pill Selection Indicators
+
+// ----------------------------------------------------------------------------
+// 2. MD3 Default Base Color Palettes (Light & Dark Variants)
+// ----------------------------------------------------------------------------
+
+// --- Light Theme Defaults ---
+$md3-primary-light:               #6750A4 !default;
+$md3-on-primary-light:            #FFFFFF !default;
+$md3-primary-container-light:     #EADDFF !default;
+$md3-on-primary-container-light: #21005D !default;
+
+$md3-secondary-light:             #625B71 !default;
+$md3-on-secondary-light:          #FFFFFF !default;
+$md3-secondary-container-light:   #E8DEF8 !default;
+$md3-on-secondary-container-light:#1D192B !default;
+
+$md3-surface-light:               #FEF7FF !default;
+$md3-surface-dim-light:           #DED8E1 !default;
+$md3-surface-bright-light:        #FEF7FF !default;
+$md3-surface-container-lowest-light: #FFFFFF !default;
+$md3-surface-container-low-light:    #F7F2FA !default;
+$md3-surface-container-light:        #F3EDF7 !default;
+$md3-surface-container-high-light:   #ECE6F0 !default;
+$md3-surface-container-highest-light:#E6E0E9 !default;
+$md3-on-surface-light:            #1D1B20 !default;
+$md3-on-surface-variant-light:    #49454F !default;
+
+$md3-outline-light:               #79747E !default;
+$md3-outline-variant-light:       #CAC4D0 !default;
+
+$md3-error-light:                 #B3261E !default;
+$md3-on-error-light:              #FFFFFF !default;
+$md3-error-container-light:       #F9DEDC !default;
+$md3-on-error-container-light:   #410E0B !default;
+
+// --- Dark Theme Defaults ---
+$md3-primary-dark:                #D0BCFF !default;
+$md3-on-primary-dark:             #381E72 !default;
+$md3-primary-container-dark:      #4F378B !default;
+$md3-on-primary-container-dark:  #EADDFF !default;
+
+$md3-secondary-dark:              #CCC2DC !default;
+$md3-on-secondary-dark:           #332D41 !default;
+$md3-secondary-container-dark:    #4A4458 !default;
+$md3-on-secondary-container-dark: #E8DEF8 !default;
+
+$md3-surface-dark:                #141218 !default;
+$md3-surface-dim-dark:            #141218 !default;
+$md3-surface-bright-dark:         #3B383E !default;
+$md3-surface-container-lowest-dark:  #0F0D13 !default;
+$md3-surface-container-low-dark:     #1D1B20 !default;
+$md3-surface-container-dark:         #211F26 !default;
+$md3-surface-container-high-dark:    #2B2930 !default;
+$md3-surface-container-highest-dark: #36343B !default;
+$md3-on-surface-dark:             #E6E0E9 !default;
+$md3-on-surface-variant-dark:     #CAC4D0 !default;
+
+$md3-outline-dark:                #938F99 !default;
+$md3-outline-variant-dark:        #444746 !default;
+
+$md3-error-dark:                  #F2B8B5 !default;
+$md3-on-error-dark:               #601410 !default;
+$md3-error-container-dark:        #8C1D18 !default;
+$md3-on-error-container-dark:    #F9DEDC !default;
+
+// ----------------------------------------------------------------------------
+// 3. Dynamic Token Assignment based on Theme Variant ($dark-theme)
+// ----------------------------------------------------------------------------
+
+$surface-container-lowest: if(theme.$dark-theme, $md3-surface-container-lowest-dark, $md3-surface-container-lowest-light) !default;
+$surface-container-low:    if(theme.$dark-theme, $md3-surface-container-low-dark, $md3-surface-container-low-light) !default;
+$surface-container:        if(theme.$dark-theme, $md3-surface-container-dark, $md3-surface-container-light) !default;
+$surface-container-high:   if(theme.$dark-theme, $md3-surface-container-high-dark, $md3-surface-container-high-light) !default;
+$surface-container-highest:if(theme.$dark-theme, $md3-surface-container-highest-dark, $md3-surface-container-highest-light) !default;
+
+$primary-container:        if(theme.$dark-theme, $md3-primary-container-dark, $md3-primary-container-light) !default;
+$on-primary-container:     if(theme.$dark-theme, $md3-on-primary-container-dark, $md3-on-primary-container-light) !default;
+
+$secondary-container:      if(theme.$dark-theme, $md3-secondary-container-dark, $md3-secondary-container-light) !default;
+$on-secondary-container:   if(theme.$dark-theme, $md3-on-secondary-container-dark, $md3-on-secondary-container-light) !default;
+
+$outline:                  if(theme.$dark-theme, $md3-outline-dark, $md3-outline-light) !default;
+$outline-variant:          if(theme.$dark-theme, $md3-outline-variant-dark, $md3-outline-variant-light) !default;
+
+$on-surface-variant:       if(theme.$dark-theme, $md3-on-surface-variant-dark, $md3-on-surface-variant-light) !default;
+
+$error-container:          if(theme.$dark-theme, $md3-error-container-dark, $md3-error-container-light) !default;
+$on-error-container:       if(theme.$dark-theme, $md3-on-error-container-dark, $md3-on-error-container-light) !default;

@@ -5,6 +5,8 @@
 @use "sass:math";
 @use "sass:string";
 @use "theme";
+@forward "md3-tokens";
+@use "md3-tokens";
 
 @function gtkalpha($color, $alpha) {
   @return string.unquote("alpha(#{$color}, #{$alpha})");
