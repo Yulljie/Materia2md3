@@ -42,41 +42,24 @@
 
   @if $t == normal {
     transition: theme.$transition, border-image theme.$ripple-duration theme.$ease-out;
-    border-image:
-      radial-gradient(
-        circle closest-corner at center calc(100% - 1px),
-        $fc 0%,
-        transparent 0%
-      ) 2 / 0 0 0;
-    box-shadow: inset 0 -1px if($fc == theme-color.$primary, theme-color.stroke(theme-color.$on-surface), $fc);
     background-color: theme-color.entry-fill(theme-color.$on-surface);
     color: theme-color.$on-surface;
     caret-color: $fc;
   }
 
   @if $t == hover {
-    box-shadow: inset 0 -1px if($fc == theme-color.$primary, theme-color.stroke(theme-color.$on-surface), $fc);
     background-color: theme-color.hover-overlay(theme-color.$on-surface, $on: theme-color.entry-fill(theme-color.$on-surface), $alt: true);
   }
 
   @if $t == focus {
-    box-shadow: inset 0 -1px if($fc == theme-color.$primary, theme-color.stroke(theme-color.$on-surface), $fc);
     background-color: theme-color.focus-overlay(theme-color.$on-surface, $on: theme-color.entry-fill(theme-color.$on-surface));
   }
 
   @if $t == checked {
-    border-image:
-      radial-gradient(
-        circle closest-corner at center calc(100% - 1px),
-        $fc 100%,
-        transparent 0%
-      ) 2 / 0 0 2px;
-    box-shadow: inset 0 -1px if($fc == theme-color.$primary, theme-color.stroke(theme-color.$on-surface), $fc);
     background-color: theme-color.focus-overlay(theme-color.$on-surface, $on: theme-color.entry-fill(theme-color.$on-surface));
   }
 
   @if $t == disabled {
-    box-shadow: inset 0 -1px theme-color.disabled-stroke(theme-color.$on-surface);
     background-color: theme-color.entry-fill(theme-color.$on-surface);
     color: theme-color.disabled(theme-color.$on-surface);
   }
