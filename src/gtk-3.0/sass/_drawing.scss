@@ -121,7 +121,7 @@ $ripple-active-transition-duration: theme.$state-duration, theme.$ripple-duratio
   } @else if $button-style == "outlined" {
     box-shadow: inset 0 0 0 1px theme-color.stroke(theme-color.$on-surface);
   } @else if $button-style == "raised" {
-    box-shadow: shadow.$z2;
+    box-shadow: none;
   }
 
   @if $button-style != "none" or $on != transparent {
@@ -135,7 +135,7 @@ $ripple-active-transition-duration: theme.$state-duration, theme.$ripple-duratio
     } @else if $button-style == "outlined" {
       box-shadow: inset 0 0 0 1px theme-color.stroke(theme-color.$on-surface);
     } @else if $button-style == "raised" {
-      box-shadow: shadow.$z4;
+      box-shadow: none;
     }
 
     background-color: theme-color.hover-overlay($color, $opacity-modifier: $opacity-modifier, $on: $on, $alt: $hover-alt);
@@ -147,7 +147,7 @@ $ripple-active-transition-duration: theme.$state-duration, theme.$ripple-duratio
     } @else if $button-style == "outlined" {
       box-shadow: inset 0 0 0 1px theme-color.stroke(theme-color.$on-surface);
     } @else if $button-style == "raised" {
-      box-shadow: shadow.$z4;
+      box-shadow: none;
     }
 
     background-color: theme-color.focus-overlay($color, $opacity-modifier: $opacity-modifier, $on: $on);
@@ -159,7 +159,7 @@ $ripple-active-transition-duration: theme.$state-duration, theme.$ripple-duratio
     } @else if $button-style == "outlined" {
       box-shadow: inset 0 0 0 1px theme-color.stroke(theme-color.$on-surface);
     } @else if $button-style == "raised" {
-      box-shadow: shadow.$z8;
+      box-shadow: none;
     }
 
     background-image: radial-gradient(circle, theme-color.pressed-overlay($color, $opacity-modifier: $opacity-modifier) 10%, transparent 0%);
