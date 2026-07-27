@@ -1168,7 +1168,7 @@ combobox {
   }
 
   menu {
-    padding: 2px 0;
+    padding: 12px 0;
 
     menuitem {
       min-height: theme.$medium-size - 2px * 2;
@@ -1955,7 +1955,7 @@ menu,
 .menu,
 .context-menu {
   margin: 4px 0; // See https://bugzilla.gnome.org/show_bug.cgi?id=591258
-  padding: 4px 0;
+  padding: 12px 0;
   border: 1px solid theme-color.divider(theme-color.$on-surface); // adds borders in a non composited env
   box-shadow: inset 0 1px theme-color.highlight(theme-color.$surface-z8);
   background-color: theme-color.$surface-z8;
