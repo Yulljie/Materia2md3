@@ -1,6 +1,7 @@
 @use "../../theme";
 @use "../../theme-color";
 @use "../../shadow";
+@use "../../md3-tokens";
 @use "gtk";
 @use "drawing";
 
@@ -1145,7 +1146,8 @@ combobox {
   }
 }
 
-dropdown {
+dropdown,
+combobox {
   > button > box {
     border-spacing: 6px;
   }
@@ -1153,18 +1155,18 @@ dropdown {
   > popover,
   > popover.menu {
     > contents {
-      padding: 6px;
-      border-radius: theme-color.$corner-s;
-      background-color: theme-color.$surface-container-highest;
+      padding: 12px 0;
+      border-radius: md3-tokens.$corner-m;
+      background-color: theme-color.$surface-z1;
 
       listview {
         padding: 4px 0;
 
         > row {
-          min-height: 36px;
-          padding: 8px 12px;
-          margin: 2px 4px;
-          border-radius: theme-color.$corner-s;
+          min-height: 28px;
+          padding: 4px 12px;
+          margin: 0;
+          border-radius: 0;
           background-color: transparent;
           color: theme-color.$on-surface;
 
@@ -1978,11 +1980,12 @@ menubar {
   }
 }
 
-popover.menu {
+popover.menu,
+popover.context-menu {
   > contents {
-    padding: 8px 6px;
-    border-radius: theme-color.$corner-s;
-    background-color: theme-color.$surface-container-highest;
+    padding: 12px 0;
+    border-radius: md3-tokens.$corner-m;
+    background-color: theme-color.$surface-z1;
   }
 
   separator {
@@ -1997,11 +2000,11 @@ popover.menu {
   }
 
   modelbutton {
-    min-height: 36px;
+    min-height: 28px;
     min-width: 40px;
-    padding: 6px 16px;
-    margin: 2px 4px;
-    border-radius: theme-color.$corner-s;
+    padding: 4px 12px;
+    margin: 0;
+    border-radius: 0;
     transition: background-color theme.$state-duration theme.$ease-out;
 
     &:hover,
