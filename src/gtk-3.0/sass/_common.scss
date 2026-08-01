@@ -1222,6 +1222,7 @@ combobox {
     margin: (theme.$medium-size - theme.$small-size) / 2;
     padding: (theme.$small-size - 16px) / 2;
     border-radius: theme.$circular-radius;
+    border: none;
   }
 }
 
