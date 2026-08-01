@@ -1157,6 +1157,16 @@ combobox {
   cellview {
     margin: -2px;
   }
+  
+  button.combo {
+    border: 1px solid theme-color.$outline;
+    border-radius: md3-tokens.$corner-s;
+    margin: 1px;
+  }
+
+  button.combo:focus {
+    @include drawing.entry(focus);
+  }
 
   button.combo cellview {
     &:dir(ltr) {

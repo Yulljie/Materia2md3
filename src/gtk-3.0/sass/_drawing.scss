@@ -53,10 +53,14 @@
 
   @if $t == focus {
     background-color: theme-color.focus-overlay(theme-color.$on-surface, $on: theme-color.entry-fill(theme-color.$on-surface));
+    box-shadow: inset 0 0 0 1px theme-color.$primary;
+    border-color: theme-color.$primary;
   }
 
   @if $t == checked {
     background-color: theme-color.focus-overlay(theme-color.$on-surface, $on: theme-color.entry-fill(theme-color.$on-surface));
+    box-shadow: inset 0 0 0 1px theme-color.$primary;
+    border-color: theme-color.$primary;
   }
 
   @if $t == disabled {
